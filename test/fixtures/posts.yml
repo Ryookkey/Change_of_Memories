@@ -1,0 +1,19 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  users: one
+  groups: one
+  title: MyString
+  first_memo: MyText
+  second_memo: MyText
+  third_memo: MyText
+  post_status: false
+
+two:
+  users: two
+  groups: two
+  title: MyString
+  first_memo: MyText
+  second_memo: MyText
+  third_memo: MyText
+  post_status: false

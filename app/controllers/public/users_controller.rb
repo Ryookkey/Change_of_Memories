@@ -1,4 +1,4 @@
-class Users::UsersController < ApplicationController
+class Public::UsersController < ApplicationController
   def mypage
   end
 

@@ -4,6 +4,13 @@ class Public::RegistrationsController < Devise::RegistrationsController
   # before_action :configure_sign_up_params, only: [:create]
   # before_action :configure_account_update_params, only: [:update]
 
+  # 会員登録時に会員ステータスを自動付与
+  def create
+    build_resource(sign_up_params)
+    resource.user_status = true
+    resource.save
+  end
+
   # GET /resource/sign_up
   # def new
   #   super

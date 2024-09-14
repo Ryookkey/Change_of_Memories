@@ -17,6 +17,15 @@ class User < ApplicationRecord
   has_many :active_relation, class_name: "Relations", foreign_key: "follower_id", dependent: :destroy
   # 与フォロー関係を通じて参照→自分がフォローしている人
   has_many :followings, through: :active_relationships, source: :follow
+  
+  GUEST_USER_EMAIL = "guest@example.com"
+  
+  def self.guest
+    find_or_create_by!(email: GUEST_USER_EMAIL) do |user|
+      user.password = SecureRandom.urlsafe_base64
+      user.name = "guestuser"
+    end
+  end
 
   def get_profile_image
     (profile_image.attached?) ? profile_image : 'no_image.jpg'

@@ -4,9 +4,9 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  has_many :posts
-  has_many :favorites
-  has_many :comments
+  has_many :posts, dependent: :destroy
+  has_many :favorites, dependent: :destroy
+  has_many :comments, dependent: :destroy
 
   # 自分がフォローされる（被フォロー）側の関係性
   has_many :passive_relations, class_name: "Relations", foreign_key: "follow_id", dependent: :destroy
@@ -17,9 +17,9 @@ class User < ApplicationRecord
   has_many :active_relation, class_name: "Relations", foreign_key: "follower_id", dependent: :destroy
   # 与フォロー関係を通じて参照→自分がフォローしている人
   has_many :followings, through: :active_relationships, source: :follow
-  
+
   GUEST_USER_EMAIL = "guest@example.com"
-  
+
   def self.guest
     find_or_create_by!(email: GUEST_USER_EMAIL) do |user|
       user.password = SecureRandom.urlsafe_base64

@@ -21,6 +21,8 @@ class Public::UsersController < ApplicationController
   end
 
   def destroy
+    user = User.find(params[:id])
+    user.destroy
   end
 
   private
@@ -28,7 +30,7 @@ class Public::UsersController < ApplicationController
   def post_params
     params.require(:post).permit(:first_memo)
   end
-  
+
   def user_params
     params.require(:user).permit(:name, :email, :password, :password_confirmation)  # 更新するフィールドを指定
   end

@@ -1,14 +1,20 @@
 class Public::UsersController < ApplicationController
-  def mypage
+  def show
+    @user = User.find(params[:id])
+    @posts = @user.posts
   end
 
   def edit
-  end
-
-  def show
+    @user = current_user
   end
 
   def update
+    @user = current_user
+    if @user.update(user_params)
+      redirect_to public_user_path(@user)
+    else
+      render :edit
+    end
   end
 
   def unsubscribe
@@ -16,4 +22,15 @@ class Public::UsersController < ApplicationController
 
   def destroy
   end
+
+  private
+
+  def post_params
+    params.require(:post).permit(:first_memo)
+  end
+  
+  def user_params
+    params.require(:user).permit(:name, :email, :password, :password_confirmation)  # 更新するフィールドを指定
+  end
+
 end

@@ -1,2 +1,30 @@
-<h1>Public::Users#edit</h1>
-<p>Find me in app/views/public/users/edit.html.erb</p>
+<div class="container">
+  <div class="row">
+    <h3>会員情報編集</h3>
+  </div>
+  <div class="row">
+    <div class="col">
+      <p>氏名</p>
+    </div>
+    <div class="col">
+      <%= form_with model: @user, url: public_user_path(@user), method: :patch, local: true do |f| %>
+        <%= f.text_field :name %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <p>メールアドレス</p>
+    </div>
+    <div class="col">
+        <%= f.text_field :email %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+    </div>
+    <div class="col">
+      <%= f.submit "更新" %>
+      <% end %>
+    </div>
+  </div>
+</div>

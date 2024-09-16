@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_09_12_120854) do
+ActiveRecord::Schema.define(version: 2024_09_16_021941) do
 
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -34,15 +34,15 @@ ActiveRecord::Schema.define(version: 2024_09_12_120854) do
     t.index ["users_id"], name: "index_comments_on_users_id"
   end
 
-  create_table "favorites", force: :cascade do |t|
+  create_table "favor0ites", force: :cascade do |t|
     t.integer "grous_id", null: false
     t.integer "posts_id", null: false
     t.integer "users_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["grous_id"], name: "index_favorites_on_grous_id"
-    t.index ["posts_id"], name: "index_favorites_on_posts_id"
-    t.index ["users_id"], name: "index_favorites_on_users_id"
+    t.index ["grous_id"], name: "index_favor0ites_on_grous_id"
+    t.index ["posts_id"], name: "index_favor0ites_on_posts_id"
+    t.index ["users_id"], name: "index_favor0ites_on_users_id"
   end
 
   create_table "groups", force: :cascade do |t|
@@ -51,8 +51,8 @@ ActiveRecord::Schema.define(version: 2024_09_12_120854) do
   end
 
   create_table "posts", force: :cascade do |t|
-    t.integer "users_id", null: false
-    t.integer "groups_id", null: false
+    t.integer "user_id", null: false
+    t.integer "group_id", null: false
     t.string "title"
     t.text "first_memo"
     t.text "second_memo"
@@ -60,8 +60,8 @@ ActiveRecord::Schema.define(version: 2024_09_12_120854) do
     t.boolean "post_status"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["groups_id"], name: "index_posts_on_groups_id"
-    t.index ["users_id"], name: "index_posts_on_users_id"
+    t.index ["group_id"], name: "index_posts_on_group_id"
+    t.index ["user_id"], name: "index_posts_on_user_id"
   end
 
   create_table "relations", force: :cascade do |t|
@@ -87,9 +87,9 @@ ActiveRecord::Schema.define(version: 2024_09_12_120854) do
 
   add_foreign_key "comments", "posts", column: "posts_id"
   add_foreign_key "comments", "users", column: "users_id"
-  add_foreign_key "favorites", "grous", column: "grous_id"
-  add_foreign_key "favorites", "posts", column: "posts_id"
-  add_foreign_key "favorites", "users", column: "users_id"
-  add_foreign_key "posts", "groups", column: "groups_id"
-  add_foreign_key "posts", "users", column: "users_id"
+  add_foreign_key "favor0ites", "grous", column: "grous_id"
+  add_foreign_key "favor0ites", "posts", column: "posts_id"
+  add_foreign_key "favor0ites", "users", column: "users_id"
+  add_foreign_key "posts", "groups"
+  add_foreign_key "posts", "users"
 end

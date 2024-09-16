@@ -1,0 +1,7 @@
+<h1>編集画面</h1>
+
+<%= form_with model: @post, url: public_post_path(@post.id), local: true do |f| %>
+  <h4>内容</h4>
+  <%= f.text_area :first_memo %>
+  <%= f.submit '保存' %>
+<% end %>

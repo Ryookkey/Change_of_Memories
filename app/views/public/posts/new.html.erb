@@ -1,0 +1,18 @@
+<h1>事実メモ</h1>
+
+<%= form_with model: @post, url: public_posts_path, local: true do |form| %>
+  <h4>内容</h4>
+  <%= form.text_area :first_memo %>
+  <%= form.submit '投稿' %>
+<% end %>
+
+<% if @post.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(@post.errors.count, "error") %> prohibited this post from being saved:</h2>
+    <ul>
+      <% @post.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>

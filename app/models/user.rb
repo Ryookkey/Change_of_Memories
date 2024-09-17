@@ -17,7 +17,9 @@ class User < ApplicationRecord
   has_many :active_relation, class_name: "Relations", foreign_key: "follower_id", dependent: :destroy
   # 与フォロー関係を通じて参照→自分がフォローしている人
   has_many :followings, through: :active_relationships, source: :follow
-
+  
+  has_one_attached :image
+  
   GUEST_USER_EMAIL = "guest@example.com"
 
   def self.guest

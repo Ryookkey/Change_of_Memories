@@ -32,7 +32,7 @@ class Public::UsersController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:name, :email, :password, :password_confirmation)  # 更新するフィールドを指定
+    params.require(:user).permit(:name, :email, :password, :password_confirmation, :image)  # 更新するフィールドを指定
   end
 
 end

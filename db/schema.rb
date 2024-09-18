@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_09_17_082304) do
+ActiveRecord::Schema.define(version: 2024_09_17_162116) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -53,24 +53,24 @@ ActiveRecord::Schema.define(version: 2024_09_17_082304) do
   end
 
   create_table "comments", force: :cascade do |t|
-    t.integer "posts_id", null: false
-    t.integer "users_id", null: false
+    t.integer "post_id", null: false
+    t.integer "user_id", null: false
     t.text "comment"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["posts_id"], name: "index_comments_on_posts_id"
-    t.index ["users_id"], name: "index_comments_on_users_id"
+    t.index ["post_id"], name: "index_comments_on_post_id"
+    t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
-  create_table "favor0ites", force: :cascade do |t|
-    t.integer "grous_id", null: false
+  create_table "favorites", force: :cascade do |t|
+    t.integer "group_id", null: false
     t.integer "posts_id", null: false
     t.integer "users_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["grous_id"], name: "index_favor0ites_on_grous_id"
-    t.index ["posts_id"], name: "index_favor0ites_on_posts_id"
-    t.index ["users_id"], name: "index_favor0ites_on_users_id"
+    t.index ["group_id"], name: "index_favorites_on_group_id"
+    t.index ["posts_id"], name: "index_favorites_on_posts_id"
+    t.index ["users_id"], name: "index_favorites_on_users_id"
   end
 
   create_table "groups", force: :cascade do |t|
@@ -109,17 +109,18 @@ ActiveRecord::Schema.define(version: 2024_09_17_082304) do
     t.boolean "user_status", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.text "introduction"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "comments", "posts", column: "posts_id"
-  add_foreign_key "comments", "users", column: "users_id"
-  add_foreign_key "favor0ites", "grous", column: "grous_id"
-  add_foreign_key "favor0ites", "posts", column: "posts_id"
-  add_foreign_key "favor0ites", "users", column: "users_id"
+  add_foreign_key "comments", "posts"
+  add_foreign_key "comments", "users"
+  add_foreign_key "favorites", "groups"
+  add_foreign_key "favorites", "posts", column: "posts_id"
+  add_foreign_key "favorites", "users", column: "users_id"
   add_foreign_key "posts", "groups"
   add_foreign_key "posts", "users"
 end

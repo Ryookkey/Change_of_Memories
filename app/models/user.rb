@@ -18,7 +18,7 @@ class User < ApplicationRecord
   # 与フォロー関係を通じて参照→自分がフォローしている人
   has_many :followings, through: :active_relationships, source: :follow
   
-  has_one_attached :image
+  has_one_attached :profile_image
   
   GUEST_USER_EMAIL = "guest@example.com"
 
@@ -31,6 +31,14 @@ class User < ApplicationRecord
 
   def get_profile_image
     (profile_image.attached?) ? profile_image : 'no_image.jpg'
+  end
+  
+  def get_profile_image
+    unless profile_image.attached?
+      file_path = Rails.root.join('app/assets/images/sample-author1.jpg')
+      profile_image.attach(io: File.open(file_path), filename: 'default-image.jpg', content_type: 'image/jpeg')
+    end
+    profile_image.variant(resize_to_limit: [100, 100]).processed
   end
 
   def follow(user)

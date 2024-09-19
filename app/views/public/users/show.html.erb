@@ -1,13 +1,42 @@
-<h3><%= @user.name %>さんのマイページ</h3>
-<%= image_tag @user.image %>
-<h5><%= @user.name %>さんの投稿一覧</h5>
-<%= link_to 'プロフィール編集', edit_public_user_path %>
-
-<% @posts.each do |post| %>
-  <div>
-    <p>メモ: <%= post.first_memo %></p>
-    <%= link_to '詳細を見る', public_post_path(post) %>
+<div class="container">
+  <div class="row mb-3">
+    <h4><%= @user.name %>さんのマイページ</h4>
   </div>
-<% end %>
+  <div class="row">
+    <table>
+      <tr>
+        <td>
+          <%= image_tag @user.get_profile_image %>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          ユーザ名: <%= @user.name %>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <%= @user.introduction %>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <%= link_to 'プロフィール編集', edit_public_user_path %>
+        </td>
+      </tr>
+    </table>
+  </div>
+
+  <br>
+  <div class="row">
+    <h5><%= @user.name %>さんの投稿一覧</h5>
+  </div>
 
 
+  <% @posts.each do |post| %>
+    <div>
+      <p>メモ: <%= post.first_memo %></p>
+      <p><%= link_to '詳細を見る', public_post_path(post) %></p>
+    </div>
+  <% end %>
+</div>

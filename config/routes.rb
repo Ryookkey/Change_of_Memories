@@ -1,14 +1,15 @@
 Rails.application.routes.draw do
 
   namespace :public do
-    resources :posts, only: [:create, :new, :show, :index, :edit, :update, :destroy]
-    resources :favorites, only: [:index, :create, :destroy]
-
     resources :users, only: [:index, :show, :edit, :update, :destroy] do
       resource :relationships, only: [:create, :destroy]
       get "followings" => "relationships#followings", as: "followings"
       get "followers" => "relationships#followers", as: "followers"
       get 'unsubscribe', to: 'users#unsubscribe'
+    end
+    resources :posts, only: [:create, :new, :show, :index, :edit, :update, :destroy] do
+      resources :favorites, only: [:index, :create, :destroy]
+      resources :comments, only: [:create]
     end
   end
 

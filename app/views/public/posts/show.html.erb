@@ -5,4 +5,28 @@
 <%= link_to '編集する', edit_public_post_path, class: "btn btn-success" %>
 <%= link_to '削除', public_post_path, method: :delete,  class: "btn btn-danger" %>
 
+<div>
+  <% if @post.comments.any? %>
+    <p>コメント件数: <%= @post.comments.count %></p>
+    <% @post.comments.each do |post_comment| %>
+      <% if post_comment.user.present? %>
+        <p><%= image_tag post_comment.user.get_profile_image %></p>
+        <%= post_comment.user.name %>
+      <% else %>
+        <p>ユーザー情報が存在しません</p>
+      <% end %>
+      <%= post_comment.created_at.strftime('%Y/%m/%d') %>
+      <%= post_comment.comment %>
+    <% end %>
+  <% else %>
+    <p>まだコメントがありません。</p>
+  <% end %>
+</div>
+<div>
+  <%= form_with(model: [@post, Comment.new], url: public_post_comments_path(@post), local: true) do |f| %>
+    <%= f.text_area :comment, rows: '5', placeholder: "コメントをここに" %>
+    <%= f.submit "送信する" %>
+  <% end %>
+</div>
+
 

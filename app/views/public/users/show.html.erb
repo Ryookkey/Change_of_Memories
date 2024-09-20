@@ -33,10 +33,19 @@
   </div>
 
 
+  <div class="row">
   <% @posts.each do |post| %>
-    <div>
-      <p>メモ: <%= post.first_memo %></p>
-      <p><%= link_to '詳細を見る', public_post_path(post) %></p>
+    <div class="col-md-4 mb-4">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">メモ内容</h5>
+          <p class="card-text"><%= post.first_memo %></p>
+          <!--プロフ画像とユーザ名、コメント数、投稿時間を以下に表示させること-->
+          <%= link_to '詳細を見る', public_post_path(post), class: "btn btn-primary" %>
+        </div>
+      </div>
     </div>
   <% end %>
+  </div>
+
 </div>

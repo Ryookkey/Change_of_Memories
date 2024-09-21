@@ -8,7 +8,7 @@ Rails.application.routes.draw do
       get 'unsubscribe', to: 'users#unsubscribe'
     end
     resources :posts, only: [:create, :new, :show, :index, :edit, :update, :destroy] do
-      resources :favorites, only: [:index, :create, :destroy]
+      resource :favorites, only: [:create, :destroy]
       resources :comments, only: [:create]
     end
   end

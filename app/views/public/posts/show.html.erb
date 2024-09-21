@@ -2,12 +2,28 @@
 
 <p>メモ: <%= @post.first_memo %></p>
 
-<%= link_to '編集する', edit_public_post_path, class: "btn btn-success" %>
-<%= link_to '削除', public_post_path, method: :delete,  class: "btn btn-danger" %>
+<%= link_to '編集する', edit_public_post_path(@post), class: "btn btn-success" %>
+<%= link_to '削除', public_post_path(@post), method: :delete, class: "btn btn-danger" %>
 
 <div>
   <% if @post.comments.any? %>
     <p>コメント件数: <%= @post.comments.count %></p>
+    
+    <!--いいね機能-->
+    <% if @post.favorited_by?(current_user) %>
+      <p>
+        <%= link_to public_post_favorites_path(@post), method: :delete do %>
+          ♥<%= Post.find(@post.id).favorites.count %>いいね
+        <% end %>
+      </p>
+    <% else %>
+      <p>
+        <%= link_to public_post_favorites_path(@post), method: :post do %>
+          ♡<%= Post.find(@post.id).favorites.count %>いいね
+        <% end %>
+      </p>
+    <% end %>
+
     <% @post.comments.each do |post_comment| %>
       <% if post_comment.user.present? %>
         <p><%= image_tag post_comment.user.get_profile_image %></p>
@@ -28,5 +44,3 @@
     <%= f.submit "送信する" %>
   <% end %>
 </div>
-
-

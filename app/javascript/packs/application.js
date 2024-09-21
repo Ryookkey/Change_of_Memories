@@ -8,8 +8,13 @@ import Turbolinks from "turbolinks"
 import * as ActiveStorage from "@rails/activestorage"
 import "channels"
 
+import "jquery";
+import "popper.js";
+import "bootstrap";
+import "bootstrap/dist/css/bootstrap.css";
+import "../stylesheets/application.css";
 
-
+// console.log('Webpacker is working!');
 Rails.start()
 Turbolinks.start()
 ActiveStorage.start()

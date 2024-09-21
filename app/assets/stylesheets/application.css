@@ -13,3 +13,42 @@
  *= require_tree .
  *= require_self
  */
+
+/* ヘッダーメニューのリストスタイルをリセットしてフレックスボックスを適用 */
+.header-menu {
+  list-style: none;
+  padding: 0;
+  margin: 0 auto; /* メニューを中央に配置 */
+  display: flex;
+  justify-content: center; /* メニュー全体を中央寄せ */
+  align-items: center; /* 垂直方向に中央揃え */
+  width: 80%; /* 左右に余白を設けるための設定 */
+}
+
+/* 各リスト項目の間にスペースを設ける */
+.header-menu li {
+  margin-right: 20px;
+}
+
+/* 最後のリスト項目に余分なマージンが付かないようにする */
+.header-menu li:last-child {
+  margin-right: 0;
+}
+
+/* リンクの装飾を変更 */
+.header-menu a {
+  text-decoration: none;
+  color: black;
+  padding: 10px; /* クリックしやすくするための余白 */
+  transition: color 0.3s ease;
+}
+
+/* ホバー時に色を変更 */
+.header-menu a:hover {
+  color: #007bff; /* 好きな色に変更可能 */
+}
+
+/* ヘッダ全体に上下の余白をつける */
+header {
+  padding: 20px 0;
+}

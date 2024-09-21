@@ -7,12 +7,12 @@
     <%= csp_meta_tag %>
 
     <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+
+
   </head>
 
   <body>
     <header>
-      
       <% if flash[:notice] %>
         <div class="alert alert-success">
           <%= flash[:notice] %>
@@ -22,17 +22,21 @@
           <%= flash[:alert] %>
         </div>
       <% end %>
-      
+
       <ul class="header-menu">
         <% if user_signed_in? %>
           <li>
             <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
           </li>
           <li>
-            <%= link_to "新規投稿", new_public_post_path %>
+            <%= link_to "マイページ", public_user_path(current_user) %>
           </li>
           <li>
-            <%= link_to "マイページ", public_user_path(current_user) %>
+            <%= link_to "新規投稿", new_public_post_path %>
+          </li>
+
+          <li>
+            <%= link_to "投稿一覧", public_posts_path %>
           </li>
         <% else %>
           <li>

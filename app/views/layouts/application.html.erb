@@ -23,6 +23,9 @@
       <% end %>
 
       <ul class="header-menu">
+        <li>
+          <%= link_to "アバウト", about_path %>
+        </li>
         <% if user_signed_in? %>
           <li>
             <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
@@ -58,9 +61,6 @@
             <%= link_to "TOP", root_path %>
           </li>
         <% end %>
-        <li>
-          <%= link_to "アバウト", about_path %>
-        </li>
       </ul>
     </header>
     <%= yield %>

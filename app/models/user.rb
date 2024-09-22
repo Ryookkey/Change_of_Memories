@@ -7,16 +7,6 @@ class User < ApplicationRecord
   has_many :posts, dependent: :destroy
   has_many :favorites, dependent: :destroy
   has_many :comments, dependent: :destroy
-
-  # 自分がフォローされる（被フォロー）側の関係性
-  has_many :passive_relations, class_name: "Relations", foreign_key: "follow_id", dependent: :destroy
-  # 被フォロー関係を通じて参照→自分をフォローしている人
-  has_many :followers, through: :passive_relationships, source: :follower
-
-  # 自分がフォローする（与フォロー）側の関係性
-  has_many :active_relation, class_name: "Relations", foreign_key: "follower_id", dependent: :destroy
-  # 与フォロー関係を通じて参照→自分がフォローしている人
-  has_many :followings, through: :active_relationships, source: :follow
   
   has_one_attached :profile_image
   
@@ -36,19 +26,35 @@ class User < ApplicationRecord
     end
     profile_image.variant(resize_to_limit: [70, 70]).processed
   end
-
+  
+  #フォローしている関連付け
+  has_many :active_relation, class_name: "Relation", foreign_key: "follower_id", dependent: :destroy
+  
+  #フォローされている関連付け
+  has_many :passive_relation, class_name: "Relation", foreign_key: "followed_id", dependent: :destroy
+  
+  #フォローしているユーザを取得
+  has_many :followings, through: :active_relation, source: :followed
+  
+  #フォロワーの取得
+  has_many :followers, through: :passive_relation, source: :follower
+  
+  #指定ユーザのフォロー
   def follow(user)
-    relationships.create(followed_id: user.id)
+    active_relation.create(followed_id: user.id)
   end
-
+  
+  #指定ユーザのフォロー解除
   def unfollow(user)
-    relationships.find_by(followed_id: user.id).destroy
+    active_relation.find_by(followed_id: user.id).destroy
   end
-
+  
+  # 指定したユーザーをフォローしているかどうかを判定
   def following?(user)
     followings.include?(user)
   end
   
+  #ユーザ検索
   def self.looks(search, word)
     if search == "perfect_match"
       @user = User.where("name LIKE?", "#{word}")

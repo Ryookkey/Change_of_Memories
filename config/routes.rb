@@ -7,14 +7,14 @@ Rails.application.routes.draw do
       get "followers" => "relationships#followers", as: "followers"
       get 'unsubscribe', to: 'users#unsubscribe'
     end
-    
+
     resources :posts, only: [:create, :new, :show, :index, :edit, :update, :destroy] do
       resource :favorites, only: [:create, :destroy]
-      resources :comments, only: [:create]
+      resources :comments, only: [:create, :destroy]
     end
-    
+
     get "search" => "searches#search"
-    
+
   end
 
   root to: 'public/homes#top'

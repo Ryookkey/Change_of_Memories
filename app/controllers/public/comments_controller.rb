@@ -10,6 +10,13 @@ module Public
         redirect_to public_post_path(post), alert: 'コメントの保存に失敗しました'
       end
     end
+    
+    def destroy
+      post = Post.find(params[:post_id])
+      comment = post.comments.find(params[:id])
+      comment.destroy
+      redirect_to public_post_path(post)
+    end
 
     private
 

@@ -1,4 +1,6 @@
 class Public::UsersController < ApplicationController
+  before_action :authenticate_user!
+
   def show
     @user = User.find(params[:id])
     @posts = @user.posts
@@ -18,11 +20,13 @@ class Public::UsersController < ApplicationController
   end
 
   def unsubscribe
-  end
-
-  def destroy
-    user = User.find(params[:id])
-    user.destroy
+    @user = current_user
+    # ユーザーを削除
+    @user.destroy
+    # ログアウト処理
+    reset_session
+    # 会員登録ページにリダイレクト
+    redirect_to new_user_registration_path, notice: "退会が完了しました"
   end
 
   private
@@ -32,7 +36,6 @@ class Public::UsersController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:name, :email, :password, :password_confirmation, :image, :introduction)  # 更新するフィールドを指定
+    params.require(:user).permit(:name, :email, :password, :password_confirmation, :image, :introduction)
   end
-
 end

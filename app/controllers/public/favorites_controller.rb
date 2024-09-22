@@ -9,7 +9,7 @@ class Public::FavoritesController < ApplicationController
     else
       flash[:alert] = favorite.errors.full_messages.to_sentence
     end
-    redirect_to public_post_path(post)
+    redirect_to request.referer
   end
 
   def destroy
@@ -22,7 +22,7 @@ class Public::FavoritesController < ApplicationController
     else
       flash[:alert] = "いいねの削除に失敗しました"
     end
-    redirect_to public_post_path(post)
+    redirect_to request.referer
   end
 
 end

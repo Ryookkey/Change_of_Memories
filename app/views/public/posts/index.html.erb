@@ -4,29 +4,45 @@
   </div>
   <div class="row">
     <div class="row">
-    <% @posts.each do |post| %>
-      <div class="col-md-5 mb-5">
-        <div class="card">
-          <div class="card-body">
-            <h5 class="card-title">メモ</h5>
-            <p class="card-text">
-              <%= post.first_memo %>
-            </p>
-            <div class="d-flex align-items-center">
-              <div class="text-center">
-                <%= image_tag post.user.get_profile_image, class: "mr-3 rounded-circle" %>
-                <div><%= post.user.name %></div> 
+      <% @posts.each do |post| %>
+        <div class="col-md-5 mb-5">
+          <div class="card">
+            <div class="card-body">
+              <!-- 写真と投稿日時を上部に配置 -->
+              <div class="d-flex justify-content-between align-items-center mb-3">
+                <div class="text-center">
+                  <%= image_tag post.user.get_profile_image, class: "rounded-circle", width: 50, height: 50 %>
+                </div>
+                <div>
+                  <span class="text-muted"><%= post.created_at.strftime('%Y/%m/%d %H:%M') %></span>
+                </div>
               </div>
-              <div class="ml-3">
+
+              <!-- 投稿内容を下に配置 -->
+              <h5 class="card-title mb-3"><%= post.first_memo %></h5>
+
+              <!-- コメント数といいねボタンを並列に配置 -->
+              <div class="d-flex justify-content-between align-items-center mb-3">
                 <span class="mr-3"><%= post.comments.count %> コメント</span>
-                <span class="text-muted"><%= post.created_at.in_time_zone('Tokyo').strftime('%Y/%m/%d %H:%M') %></span>
+                <% if post.favorited_by?(current_user) %>
+                  <%= link_to public_post_favorites_path(post), method: :delete, class: "btn btn-outline-danger btn-sm" do %>
+                    ♥<%= post.favorites.count %> いいね
+                  <% end %>
+                <% else %>
+                  <%= link_to public_post_favorites_path(post), method: :post, class: "btn btn-outline-primary btn-sm" do %>
+                    ♡<%= post.favorites.count %> いいね
+                  <% end %>
+                <% end %>
+              </div>
+
+              <!-- 詳細を見るボタンを下部に配置 -->
+              <div class="text-center">
+                <%= link_to '詳細を見る', public_post_path(post), class: "btn btn-primary" %>
               </div>
             </div>
-            <%= link_to '詳細を見る', public_post_path(post), class: "btn btn-primary mt-3" %>
           </div>
         </div>
-      </div>
-    <% end %>
-  </div>
+      <% end %>
+    </div>
   </div>
 </div>

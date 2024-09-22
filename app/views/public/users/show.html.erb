@@ -20,6 +20,21 @@
         </td>
       </tr>
       <tr>
+        <td>フォロー数:<%= link_to @user.followings.count, public_user_followings_path(@user) %></td>
+        <td>フォロワー数:<%= link_to @user.followers.count, public_user_followers_path(@user) %></td>
+      </tr>
+      <tr>
+        <td>
+          <% if current_user != @user %>
+            <% if current_user.following?(@user) %>
+              <%= link_to "フォロー外す", public_user_relationships_path(@user.id), method: :delete, class: "btn btn-info" %>
+            <% else %>
+              <%= link_to "フォローする", public_user_relationships_path(@user.id), method: :post, class: "btn btn-success" %>
+            <% end %>
+          <% end %>
+        </td>
+      </tr>
+      <tr>
         <td>
           <%= link_to 'プロフィール編集', edit_public_user_path %>
         </td>
@@ -30,7 +45,7 @@
   <br>
   <div class="row">
     <h5><%= @user.name %>さんの投稿一覧</h5>
-  </div>
+  </div><br>
 
   <div class="row">
     <% @posts.each do |post| %>
@@ -44,10 +59,11 @@
             <div class="d-flex align-items-center">
               <div class="text-center">
                 <%= image_tag post.user.get_profile_image, class: "mr-3 rounded-circle" %>
-                <div><%= @user.name %></div> 
+                <div><%= @user.name %></div>
               </div>
               <div class="ml-3">
                 <span class="mr-3"><%= post.comments.count %> コメント</span>
+
                 <span class="text-muted"><%= post.created_at.strftime('%Y/%m/%d %H:%M') %></span>
               </div>
             </div>

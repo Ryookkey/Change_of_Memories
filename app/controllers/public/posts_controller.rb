@@ -1,4 +1,7 @@
 class Public::PostsController < ApplicationController
+  before_action :authenticate_user!  
+  before_action :correct_user, only: [:edit, :update, :destroy]  
+  
   def new
     @post = Post.new
   end
@@ -76,6 +79,14 @@ class Public::PostsController < ApplicationController
 
   private
 
+  def correct_user
+    @post = Post.find(params[:id])
+    unless @post.user == current_user
+      flash[:alert] = "権限がありません。"
+      redirect_to public_post_path  # 権限がない場合、リダイレクトさせる
+    end
+  end
+  
   def post_params
     params.require(:post).permit(:first_memo, :second_memo, :third_memo)
   end

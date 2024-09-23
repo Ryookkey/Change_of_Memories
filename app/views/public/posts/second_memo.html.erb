@@ -1,17 +1,18 @@
-<h1>Second Memo</h1>
+<div class="container">
+  <h1>Second Memo</h1>
 
-<%= form_with model: @post, url: second_memo_public_post_path(@post), method: :patch, local: true, id: "secondMemoForm" do |form| %>
-  <h4>Second Memo</h4>
-  <%= form.text_area :second_memo %>
-
-  <!-- 更新ボタン -->
-  <%= form.submit '更新', class: 'btn btn-secondary' %>
+  <%= form_with model: @post, url: second_memo_public_post_path(@post), method: :patch, local: true, id: "secondMemoForm" do |form| %>
+    <h4>Second Memo</h4>
+    <%= form.text_area :second_memo %>
   
-   <!-- 次に進むボタン（hidden_fieldでフラグを送信） -->
-  <%= hidden_field_tag :next_step, false, id: "nextStepField" %>
-  <%= button_tag '次へ (third memo)', type: 'button', class: 'btn btn-primary', id: "nextStepButton" %>
-  
-<% end %>
+    <%= form.submit '更新', class: 'btn btn-secondary' %>
+    
+     <!-- 次に進むボタン（hidden_fieldでフラグを送信） -->
+    <%= hidden_field_tag :next_step, false, id: "nextStepField" %>
+    <%= button_tag '次へ (third memo)', type: 'button', class: 'btn btn-primary', id: "nextStepButton" %>
+    
+  <% end %>
+</div>
 
 <!-- JavaScriptで次に進むボタンを押した際にフラグを変更 -->
 <script>

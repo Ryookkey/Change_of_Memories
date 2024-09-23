@@ -12,24 +12,56 @@
 
   <body>
     <header>
-      <% if user_signed_in? %>
-        <li>
-          <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
-        </li>
-      <% else %>
-        <li>
-          <%= link_to "新規登録", new_user_registration_path %>
-        </li>
-        <li>
-          <%= link_to "ログイン", new_user_session_path %>
-        </li>
-        <li>
-          <%= link_to "TOP", root_path %>
-        </li>
+      <% if flash[:notice] %>
+        <div class="alert alert-success">
+          <%= flash[:notice] %>
+        </div>
+      <% elsif flash[:alert] %>
+        <div class="alert alert-danger">
+          <%= flash[:alert] %>
+        </div>
       <% end %>
-      <li>
-        <%= link_to "アバウト", about_path %>
-      </li>
+
+      <ul class="header-menu">
+        <li>
+          <%= link_to "アバウト", about_path %>
+        </li>
+        <% if user_signed_in? %>
+          <li>
+            <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
+          </li>
+          <li>
+            <%= link_to "マイページ", public_user_path(current_user) %>
+          </li>
+          <li>
+            <%= link_to "新規投稿", new_public_post_path %>
+          </li>
+          <li>
+            <%= link_to "投稿一覧", public_posts_path %>
+          </li>
+          
+          <!--検索機能-->
+          <div class="search_form">
+            <%= form_with url: public_search_path, local: true, method: :get do |f| %>
+              <%= f.text_field :word %>
+              <%= f.select :range, options_for_select([['User'], ['メモ']]) %>
+              <%= f.select :search, options_for_select([["完全一致","perfect_match"], ["前方一致","forward_match"],  ["後方一致","backward_match"], ["部分一致","partial_match"]]) %>
+              <%= f.submit "検索", class: "btn btn-primary" %>
+            <% end %>
+          </div>
+          
+        <% else %>
+          <li>
+            <%= link_to "新規登録", new_user_registration_path %>
+          </li>
+          <li>
+            <%= link_to "ログイン", new_user_session_path %>
+          </li>
+          <li>
+            <%= link_to "TOP", root_path %>
+          </li>
+        <% end %>
+      </ul>
     </header>
     <%= yield %>
   </body>

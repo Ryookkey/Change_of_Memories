@@ -4,11 +4,22 @@ class Public::RegistrationsController < Devise::RegistrationsController
   # before_action :configure_sign_up_params, only: [:create]
   # before_action :configure_account_update_params, only: [:update]
 
+  def after_sign_up_path_for(resource)
+    public_user_path(resource)
+  end
+
   # 会員登録時に会員ステータスを自動付与
   def create
     build_resource(sign_up_params)
     resource.user_status = true
-    resource.save
+    if resource.save
+      sign_in(resource_name, resource)
+      redirect_to after_sign_up_path_for(resource)
+    else
+      clean_up_passwords(resource)
+      set_minimum_password_length
+      respond_with(resource)
+    end
   end
 
   # GET /resource/sign_up

@@ -1,0 +1,16 @@
+<ul class="list-group">
+  <% users.each do |user| %>
+    <li class="list-group-item d-flex align-items-center">
+      <!-- プロフィール画像を表示（左側） -->
+      <div class="mr-3">
+        <%= image_tag user.get_profile_image, class: "rounded-circle", width: 50, height: 50 %>
+      </div>
+      
+      <!-- ユーザー名と投稿数を表示 -->
+      <div>
+        <%= link_to user.name, public_user_path(user), class: "font-weight-bold" %><br>
+        <span>投稿数: <%= user.posts.count %></span>
+      </div>
+    </li>
+  <% end %>
+</ul>

@@ -11,8 +11,10 @@ import "channels"
 import "jquery";
 import "popper.js";
 import "bootstrap";
-import "../stylesheets/application"; 
+import "bootstrap/dist/css/bootstrap.css";
+import "../stylesheets/application.css";
 
+// console.log('Webpacker is working!');
 Rails.start()
 Turbolinks.start()
 ActiveStorage.start()

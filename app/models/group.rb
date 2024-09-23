@@ -1,4 +1,4 @@
 class Group < ApplicationRecord
-  has_many :posts
-  has_many :favorites
+  has_many :posts, dependent: :destroy
+  has_many :favorites, dependent: :destroy
 end

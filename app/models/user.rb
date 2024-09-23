@@ -4,22 +4,14 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  has_many :posts
-  has_many :favorites
-  has_many :comments
-
-  # 自分がフォローされる（被フォロー）側の関係性
-  has_many :passive_relations, class_name: "Relations", foreign_key: "follow_id", dependent: :destroy
-  # 被フォロー関係を通じて参照→自分をフォローしている人
-  has_many :followers, through: :passive_relationships, source: :follower
-
-  # 自分がフォローする（与フォロー）側の関係性
-  has_many :active_relation, class_name: "Relations", foreign_key: "follower_id", dependent: :destroy
-  # 与フォロー関係を通じて参照→自分がフォローしている人
-  has_many :followings, through: :active_relationships, source: :follow
+  has_many :posts, dependent: :destroy
+  has_many :favorites, dependent: :destroy
+  has_many :comments, dependent: :destroy
+  
+  has_one_attached :profile_image
   
   GUEST_USER_EMAIL = "guest@example.com"
-  
+
   def self.guest
     find_or_create_by!(email: GUEST_USER_EMAIL) do |user|
       user.password = SecureRandom.urlsafe_base64
@@ -28,18 +20,52 @@ class User < ApplicationRecord
   end
 
   def get_profile_image
-    (profile_image.attached?) ? profile_image : 'no_image.jpg'
+    unless profile_image.attached?
+      file_path = Rails.root.join('app/assets/images/sample-author1.jpg')
+      profile_image.attach(io: File.open(file_path), filename: 'default-image.jpg', content_type: 'image/jpeg')
+    end
+    profile_image.variant(resize_to_limit: [70, 70]).processed
   end
-
+  
+  #フォローしている関連付け
+  has_many :active_relation, class_name: "Relation", foreign_key: "follower_id", dependent: :destroy
+  
+  #フォローされている関連付け
+  has_many :passive_relation, class_name: "Relation", foreign_key: "followed_id", dependent: :destroy
+  
+  #フォローしているユーザを取得
+  has_many :followings, through: :active_relation, source: :followed
+  
+  #フォロワーの取得
+  has_many :followers, through: :passive_relation, source: :follower
+  
+  #指定ユーザのフォロー
   def follow(user)
-    relationships.create(followed_id: user.id)
+    active_relation.create(followed_id: user.id)
   end
-
+  
+  #指定ユーザのフォロー解除
   def unfollow(user)
-    relationships.find_by(followed_id: user.id).destroy
+    active_relation.find_by(followed_id: user.id).destroy
   end
-
+  
+  # 指定したユーザーをフォローしているかどうかを判定
   def following?(user)
     followings.include?(user)
+  end
+  
+  #ユーザ検索
+  def self.looks(search, word)
+    if search == "perfect_match"
+      @user = User.where("name LIKE?", "#{word}")
+    elsif search == "forward_match"
+      @user = User.where("name LIKE?", "#{word}")
+    elsif search == "backward_match"
+      @user = User.where("name LIKE?", "#{word}")
+    elsif search == "partial_match"
+      @user = User.where("name LIKE?","%#{word}%")
+    else
+      @user = User.all
+    end
   end
 end

@@ -1,0 +1,54 @@
+<div class="container">
+
+  <div class="row mb-4">
+    <h3>会員情報編集</h3>
+  </div>
+
+  <%= form_with model: @user, url: public_user_path(@user), method: :patch, local: true do |f| %>
+    <div class="row">
+      <div class="col">
+        <p>氏名</p>
+      </div>
+      <div class="col">
+        <%= f.text_field :name %>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <p>メールアドレス</p>
+      </div>
+      <div class="col">
+          <%= f.text_field :email %>
+      </div>
+    </div>
+    
+    <div class="row">
+      <div class="col">
+        <p>自己紹介</p>
+      </div>
+      <div class="col">
+        <%= f.text_field :introduction %>
+      </div>
+    </div>
+    
+    <div class="row">
+      <div class="col">
+        <p>プロフィール画像</p>
+      </div>
+      <div class="col">
+        <%= f.file_field :image, accept: "image/*" %>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <%= f.submit "更新" %>
+      </div>
+      <div class="col">
+        <% end %>
+        <%= link_to '退会する', public_user_unsubscribe_path(@user) %>
+      </div>
+    </div>
+
+</div>

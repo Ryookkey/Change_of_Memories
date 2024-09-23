@@ -11,6 +11,12 @@ Rails.application.routes.draw do
     resources :posts, only: [:create, :new, :show, :index, :edit, :update, :destroy] do
       resource :favorites, only: [:create, :destroy]
       resources :comments, only: [:create, :destroy]
+      member do
+        get 'second_memo'
+        patch 'second_memo'
+        get 'third_memo'
+        patch 'third_memo'
+      end
     end
 
     get "search" => "searches#search"

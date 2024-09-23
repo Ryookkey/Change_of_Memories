@@ -19,9 +19,39 @@ class Public::PostsController < ApplicationController
     @post.group = Group.create!
 
     if @post.save
-      redirect_to public_user_path(current_user)  # @post を渡して詳細ページに遷移
+      if params[:next_step] && params[:next_step] == 'true'
+        redirect_to second_memo_public_post_path(@post)
+      else
+        redirect_to public_user_path(current_user)
+      end
     else
       render :new
+    end
+  end
+
+  def second_memo
+    @post = Post.find(params[:id])
+    if request.patch?
+      if @post.update(post_params)
+        if params[:next_step] && params[:next_step] == 'true'
+          redirect_to third_memo_public_post_path(@post) # third_memoの画面に遷移
+        else
+          redirect_to public_user_path(current_user) # 通常の更新
+        end
+      else
+        render :second_memo
+      end
+    end
+  end
+  
+  def third_memo
+    @post = Post.find(params[:id])
+    if request.patch?
+      if @post.update(post_params)
+        redirect_to public_user_path(current_user) # 完了後はマイページへ
+      else
+        render :third_memo
+      end
     end
   end
 
@@ -31,8 +61,11 @@ class Public::PostsController < ApplicationController
 
   def update
     post = Post.find(params[:id])
-    post.update(post_params)
-    redirect_to public_post_path(post.id)
+    if post.update(post_params)
+      redirect_to public_post_path(post.id)
+    else
+      render :edit
+    end
   end
 
   def destroy
@@ -46,5 +79,4 @@ class Public::PostsController < ApplicationController
   def post_params
     params.require(:post).permit(:first_memo, :second_memo, :third_memo)
   end
-
 end

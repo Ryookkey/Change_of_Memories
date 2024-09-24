@@ -21,11 +21,8 @@ class Public::UsersController < ApplicationController
 
   def unsubscribe
     @user = current_user
-    # ユーザーを削除
     @user.destroy
-    # ログアウト処理
     reset_session
-    # 会員登録ページにリダイレクト
     redirect_to new_user_registration_path, notice: "退会が完了しました"
   end
 
@@ -36,6 +33,6 @@ class Public::UsersController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:name, :email, :password, :password_confirmation, :image, :introduction)
+    params.require(:user).permit(:name, :email, :password, :password_confirmation, :profile_image, :introduction)
   end
 end

@@ -6,9 +6,13 @@
     <tbody>
       <% @users.each do |user| %>
         <tr>
-          <td>
+          <td class="d-flex align-items-center">
+            <!-- プロフィール画像 -->
             <%= image_tag user.get_profile_image, class: "rounded-circle", width: 50, height: 50 %>
-            <%= link_to user.name, public_user_path(user), method: :get %>
+            &nbsp;&nbsp;
+
+            <!-- ユーザー名 -->
+            <%= link_to user.name, public_user_path(user), method: :get, class: "ml-3" %>
           </td>
         </tr>
       <% end %>
@@ -16,19 +20,22 @@
   <% else %>
     <!--検索対象モデルがUserではない時(= 検索対象モデルがメモの時) -->
     <tbody>
-  <% @posts.each do |post| %>
-    <tr>
-      <td>
-        <%= image_tag post.user.get_profile_image, class: "rounded-circle", width: 50, height: 50 %>
-        &nbsp;&nbsp;
-        <%= link_to post.user.name, public_user_path(post.user), method: :get %>
-        &nbsp;&nbsp;
-        
-        <%= link_to post.first_memo, public_post_path(post) %>
-      </td>
-    </tr>
-  <% end %>
-</tbody>
+      <% @posts.each do |post| %>
+        <tr>
+          <td class="d-flex align-items-center">
+            <!-- 投稿者のプロフィール画像 -->
+            <%= image_tag post.user.get_profile_image, class: "rounded-circle", width: 50, height: 50 %>
+            &nbsp;&nbsp;
 
+            <!-- 投稿者の名前 -->
+            <%= link_to post.user.name, public_user_path(post.user), method: :get, class: "ml-3" %>
+            &nbsp;&nbsp;
+
+            <!-- メモの内容 -->
+            <%= link_to post.first_memo, public_post_path(post), class: "ml-3" %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
   <% end %>
 </table>

@@ -1,29 +1,37 @@
-<h1>事実メモ</h1>
-
-<%= form_with model: @post, url: public_posts_path, local: true, id: "postForm" do |form| %>
-  <h4>内容</h4>
-  <%= form.text_area :first_memo %>
-
-  <!-- 新規投稿ボタン -->
-  <%= form.submit '新規投稿', class: 'btn btn-secondary' %>
-
-  <!-- 次に進むボタン（hidden_fieldでフラグを送信） -->
-  <%= hidden_field_tag :next_step, false, id: "nextStepField" %>
-  <%= button_tag '次に進む (second memo)', type: 'button', class: 'btn btn-primary', id: "nextStepButton" %>
-<% end %>
-
-<% if @post.errors.any? %>
-  <div id="error_explanation">
-    <h2><%= pluralize(@post.errors.count, "error") %> prohibited this post from being saved:</h2>
-    <ul>
-      <% @post.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-    </ul>
+<div class="container">
+  <div class="row mt-5">
+    <h1>First Memo</h1>
   </div>
-<% end %>
+  <h5>第一のメモです。<br>自身が感銘受けたものや、忘れたくないもの、メモしておきたいものを記載しましょう！</h5>
 
-<!-- JavaScriptで次に進むボタンを押した際にフラグを変更 -->
+  <div class="row mt-5 justify-content-center">
+    <%= form_with model: @post, url: public_posts_path, local: true, id: "postForm" do |form| %>
+      <h4>内容</h4>
+      <%= form.text_area :first_memo, class: 'form-control w-100 mb-4' %>
+
+      <div class="d-flex justify-content-between mt-3 w-100">
+        <%= form.submit "新規投稿　　　　　　　　 (マイページ)", class: 'btn btn-secondary w-50 mr-2 text-wrap', style: 'white-space: pre-line;' %>
+
+        <!-- 次に進むボタン（hidden_fieldでフラグを送信） -->
+        <%= hidden_field_tag :next_step, false, id: "nextStepField" %>
+
+        <%= button_tag '次に進む<br>(second memo)'.html_safe, type: 'button', class: 'btn btn-primary w-50 text-wrap', id: "nextStepButton", style: 'white-space: normal;' %>
+      </div>
+    <% end %>
+
+    <% if @post.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@post.errors.count, "error") %> prohibited this post from being saved:</h2>
+        <ul>
+          <% @post.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+  </div>
+</div>
+
 <script>
   document.getElementById("nextStepButton").addEventListener("click", function() {
     document.getElementById("nextStepField").value = true;

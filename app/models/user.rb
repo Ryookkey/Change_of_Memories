@@ -27,16 +27,12 @@ class User < ApplicationRecord
     profile_image.variant(resize_to_limit: [70, 70]).processed
   end
   
-  #フォローしている関連付け
   has_many :active_relation, class_name: "Relation", foreign_key: "follower_id", dependent: :destroy
   
-  #フォローされている関連付け
   has_many :passive_relation, class_name: "Relation", foreign_key: "followed_id", dependent: :destroy
   
-  #フォローしているユーザを取得
   has_many :followings, through: :active_relation, source: :followed
   
-  #フォロワーの取得
   has_many :followers, through: :passive_relation, source: :follower
   
   #指定ユーザのフォロー

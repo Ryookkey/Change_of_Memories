@@ -17,6 +17,16 @@
         <h4>Second Memo</h4>
         <%= form.text_area :second_memo, class: 'form-control w-100 mb-4' %>
       </div>
+      <div class="d-flex">
+        <div class="mr-4">
+          <%= form.radio_button :first_post_status, true, id: "first_post_status_public" %>
+          <label for="second_post_status_public">公開</label>
+        </div>
+        <div>
+          <%= form.radio_button :first_post_status, false, id: "first_post_status_private" %>
+          <label for="second_post_status_private">非公開</label>
+        </div>
+      </div>
 
       <div class="d-flex justify-content-between mt-3 w-100">
         <%= form.submit '投稿　　　　　　　（マイページ）', class: 'btn btn-secondary w-50 mr-2 text-wrap', style: 'white-space: pre-line;' %>

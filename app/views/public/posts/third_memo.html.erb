@@ -10,12 +10,25 @@
       <p><%= @post.second_memo %></p>
     </div>
   </div>
-
+  
+  
+  
   <div class="row mt-5 justify-content-center">
     <%= form_with model: @post, url: public_post_path(@post), method: :patch, local: true, id: "thirdMemoForm" do |form| %>
       <div class="col-12">
         <h4 class="text-center">Third Memo</h4>
         <%= form.text_area :third_memo, class: 'form-control w-100 mb-4', rows: 4 %>
+      </div>
+      
+      <div class="d-flex">
+        <div class="mr-4">
+          <%= form.radio_button :first_post_status, true, id: "first_post_status_public" %>
+          <label for="first_post_status_public">公開</label>
+        </div>
+        <div>
+          <%= form.radio_button :first_post_status, false, id: "first_post_status_private" %>
+          <label for="first_post_status_private">非公開</label>
+        </div>
       </div>
 
       <div class="col-12">

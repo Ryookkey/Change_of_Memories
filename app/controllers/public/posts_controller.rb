@@ -7,13 +7,15 @@ class Public::PostsController < ApplicationController
   end
 
   def index
-    @posts = Post.all
+    @posts = Post.where("first_post_status = ? OR second_post_status = ? OR third_post_status = ?", true, true, true)
     @post = Comment.new
   end
+
 
   def show
     @post = Post.find(params[:id])
     @post_comment = Post.new
+    @posts = current_user.posts
   end
 
   def create
@@ -88,6 +90,6 @@ class Public::PostsController < ApplicationController
   end
   
   def post_params
-    params.require(:post).permit(:first_memo, :second_memo, :third_memo)
+    params.require(:post).permit(:first_memo, :second_memo, :third_memo, :first_post_status, :second_post_status, :third_post_status)
   end
 end

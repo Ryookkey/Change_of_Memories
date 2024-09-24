@@ -5,52 +5,28 @@
   <h5>第一のメモです。<br>自身が感銘受けたものや、忘れたくないもの、メモしておきたいものを記載しましょう！</h5>
 
   <div class="row mt-5 justify-content-center">
-    <% if @post.errors.any? %>
-      <div id="error_explanation" class="alert alert-danger">
-        <h2><%= pluralize(@post.errors.count, "エラー") %>があります：</h2>
-        <ul>
-          <% @post.errors.full_messages.each do |message| %>
-            <li><%= message %></li>
-          <% end %>
-        </ul>
-      </div>
-    <% end %>
-
     <%= form_with model: @post, url: public_posts_path, local: true, id: "postForm" do |form| %>
-      <h4>内容</h4>
-      <%= form.text_area :first_memo, class: 'form-control w-100 mb-4', placeholder: "第一のメモを入力してください" %>
+      <h4>First Memo</h4>
+      <%= form.text_area :first_memo, class: 'form-control w-100 mb-4' %>
+
+      <!-- First Memo 公開・非公開選択 -->
+      <h4>公開設定</h4>
+      <div class="d-flex">
+        <div class="mr-4">
+          <%= form.radio_button :first_post_status, true, id: "first_post_status_public" %>
+          <label for="first_post_status_public">公開</label>
+        </div>
+        <div>
+          <%= form.radio_button :first_post_status, false, id: "first_post_status_private" %>
+          <label for="first_post_status_private">非公開</label>
+        </div>
+      </div>
 
       <div class="d-flex justify-content-between mt-3 w-100">
-        <!-- 新規投稿ボタン -->
-        <%= button_tag "新規投稿 (マイページ)", type: 'button', class: 'btn btn-secondary w-50 mr-2 text-wrap', id: "submitPostButton", style: 'white-space: pre-line;' %>
-
-        <!-- 次に進むボタン（hidden_fieldでフラグを送信） -->
+        <%= form.submit "新規投稿 (マイページ)", class: 'btn btn-secondary w-50 mr-2 text-wrap' %>
         <%= hidden_field_tag :next_step, false, id: "nextStepField" %>
-        <%= button_tag '次に進む<br>(second memo)'.html_safe, type: 'button', class: 'btn btn-primary w-50 text-wrap', id: "nextStepButton", style: 'white-space: normal;' %>
+        <%= button_tag '次に進む (second memo)', type: 'button', class: 'btn btn-primary w-50', id: "nextStepButton" %>
       </div>
     <% end %>
   </div>
 </div>
-
-<script>
-  function validateFormAndSubmit(isNextStep) {
-    var firstMemo = document.getElementById("post_first_memo").value;
-    if (firstMemo.trim() === "") {
-      alert("First Memoを入力してください。");
-      return false;
-    } else {
-      if (isNextStep) {
-        document.getElementById("nextStepField").value = true;
-      }
-      document.getElementById("postForm").submit();
-    }
-  }
-
-  document.getElementById("submitPostButton").addEventListener("click", function() {
-    validateFormAndSubmit(false);
-  });
-
-  document.getElementById("nextStepButton").addEventListener("click", function() {
-    validateFormAndSubmit(true);
-  });
-</script>

@@ -1,0 +1,29 @@
+<h1>いいねした投稿一覧</h1>
+
+<div class="container">
+  <% if @favorite_posts.any? %>
+    <div class="row">
+      <% @favorite_posts.each do |post| %>
+        <div class="col-md-4 mb-4">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title"><%= link_to post.first_memo, public_post_path(post) %></h5>
+
+              <% if post.second_memo.present? %>
+                <h5 class="card-title"><%= link_to post.second_memo, public_post_path(post) %></h5>
+              <% end %>
+
+              <% if post.third_memo.present? %>
+                <h5 class="card-title"><%= link_to post.third_memo, public_post_path(post) %></h5>
+              <% end %>
+
+              <p>投稿者: <%= link_to post.user.name, public_user_path(post.user) %></p>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  <% else %>
+    <p>まだいいねした投稿はありません。</p>
+  <% end %>
+</div>

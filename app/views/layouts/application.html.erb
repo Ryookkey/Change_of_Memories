@@ -39,6 +39,9 @@
           <li>
             <%= link_to "投稿一覧", public_posts_path %>
           </li>
+          <li>
+            <%= link_to "いいね一覧", public_user_favorites_path(current_user) %>
+          </li>
           
           <!--検索機能-->
           <div class="search_form">

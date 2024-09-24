@@ -26,6 +26,11 @@ class Public::UsersController < ApplicationController
     redirect_to new_user_registration_path, notice: "退会が完了しました"
   end
 
+  def favorites
+    @user = User.find(params[:user_id])
+    @favorite_posts = @user.favorites.includes(:post).map(&:post)
+  end
+
   private
 
   def post_params

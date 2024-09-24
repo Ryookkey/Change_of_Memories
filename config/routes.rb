@@ -1,11 +1,11 @@
 Rails.application.routes.draw do
-
   namespace :public do
     resources :users, only: [:index, :show, :edit, :update, :destroy] do
       resource :relationships, only: [:create, :destroy]
       get "followings" => "relationships#followings", as: "followings"
       get "followers" => "relationships#followers", as: "followers"
       get 'unsubscribe', to: 'users#unsubscribe'
+      get 'favorites' => 'users#favorites', as: 'favorites'  # ここを追加
     end
 
     resources :posts, only: [:create, :new, :show, :index, :edit, :update, :destroy] do
@@ -20,7 +20,6 @@ Rails.application.routes.draw do
     end
 
     get "search" => "searches#search"
-
   end
 
   root to: 'public/homes#top'

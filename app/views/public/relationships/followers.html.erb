@@ -1,6 +1,8 @@
-<h2>フォロワーリスト</h2>
-<% if @users.exists? %>
-  <%= render "public/users/index", users: @users %>
-<% else %>
-  <p>ユーザーはいません</p>
-<% end %>
+<div class="container">
+  <h2>フォロワーリスト</h2><br>
+    <% if @users.exists? %>
+      <%= render "public/users/index", users: @users %>
+    <% else %>
+      <h5>現在フォロワーはいません</h5>
+    <% end %>
+</div>

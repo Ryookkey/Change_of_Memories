@@ -15,17 +15,14 @@
               </div>
             </div>
 
-            <!-- First Memo -->
             <h5 class="card-title mb-3 text-left text-muted">First Memo</h5>
               <p class="mb-3 text-left"><%= post.first_memo %></p>
 
-            <!-- Second Memo -->
             <% if post.second_memo.present? %>
               <h5 class="card-subtitle mb-2 text-left text-muted">Second Memo</h5>
               <p class="mb-3 text-left"><%= post.second_memo %></p>
             <% end %>
 
-            <!-- Third Memo -->
             <% if post.third_memo.present? %>
               <h5 class="card-subtitle mb-2 text-left text-muted">Third Memo</h5>
               <p class="mb-3 text-left"><%= post.third_memo %></p>

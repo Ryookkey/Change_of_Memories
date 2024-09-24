@@ -1,15 +1,24 @@
 <div class="container">
   <div class="row mt-5">
-    <h1>Third Memo</h1>
+    <h1 class="text-center">Third Memo</h1>
+  </div><br>
+  <h5>第三のメモです。<br>前画面ではfirst memoの内容を踏まえて、抽象化を行いました。<br>抽象化を行ったことで、気付けるアイディアが出てきます！<br>忘れないようにメモしましょう！<br></h5>
+
+  <div class="row mt-5 justify-content-center">
+    <div class="col-12 text-center">
+      <h5>Second Memo</h5>
+      <p><%= @post.second_memo %></p>
+    </div>
   </div>
 
   <div class="row mt-5 justify-content-center">
-    <%= form_with model: @post, url: public_post_path(@post), method: :patch, local: true, class: 'w-50' do |form| %>
-      <h4>Third Memo</h4>
+    <%= form_with model: @post, url: public_post_path(@post), method: :patch, local: true, id: "thirdMemoForm" do |form| %>
+      <div class="col-12">
+        <h4 class="text-center">Third Memo</h4>
+        <%= form.text_area :third_memo, class: 'form-control w-100 mb-4', rows: 4 %>
+      </div>
 
-      <%= form.text_area :third_memo, class: 'form-control w-100 mb-4' %>
-
-      <div class="d-flex justify-content-center">
+      <div class="col-12">
         <%= form.submit '完了', class: 'btn btn-primary w-100' %>
       </div>
     <% end %>

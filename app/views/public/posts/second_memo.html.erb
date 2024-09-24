@@ -1,21 +1,31 @@
 <div class="container">
   <div class="row mt-5">
-    <h1>Second Memo</h1>  
+    <h1>Second Memo</h1>
+  </div><br>
+  <h5>第二のメモです。<br>前画面で記入したメモを基に抽象化を行いましょう。<br>抽象化を行うことで、次のメモが活きてきます！<br>例)</h5>
+
+  <div class="row mt-5 justify-content-center">
+    <div class="col-8 text-center">
+      <h5>First Memo</h5>
+      <p><%= @post.first_memo %></p>
+    </div>
   </div>
-  
+
   <div class="row mt-5 justify-content-center">
     <%= form_with model: @post, url: second_memo_public_post_path(@post), method: :patch, local: true, id: "secondMemoForm" do |form| %>
-      <h4>Second Memo</h4>
-      <%= form.text_area :second_memo, class: 'form-control w-100 mb-4' %>
-      
-      <div class="d-flex justfy-content-between mt-3 w-100">
+      <div class="col-8 offset-md-1">
+        <h4>Second Memo</h4>
+        <%= form.text_area :second_memo, class: 'form-control w-100 mb-4' %>
+      </div>
+
+      <div class="d-flex justify-content-between mt-3 w-100">
         <%= form.submit '投稿　　　　　　　（マイページ）', class: 'btn btn-secondary w-50 mr-2 text-wrap', style: 'white-space: pre-line;' %>
-    
-         <!-- 次に進むボタン（hidden_fieldでフラグを送信） -->
+
+        <!-- 次に進むボタン（hidden_fieldでフラグを送信） -->
         <%= hidden_field_tag :next_step, false, id: "nextStepField" %>
         <%= button_tag '次に進む<br>(third memo)'.html_safe, type: 'button', class: 'btn btn-primary w-50 text-wrap', id: "nextStepButton", style: 'white-space: normal;' %>
       </div>
-      <% end %>
+    <% end %>
   </div>
 </div>
 

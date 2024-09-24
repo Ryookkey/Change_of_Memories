@@ -1,5 +1,6 @@
 class Public::UsersController < ApplicationController
   before_action :authenticate_user!
+  before_action :correct_user, only: [:show, :edit, :update, :favorites]
 
   def show
     @user = User.find(params[:id])
@@ -27,14 +28,18 @@ class Public::UsersController < ApplicationController
   end
 
   def favorites
-    @user = User.find(params[:user_id])
+    @user = current_user
     @favorite_posts = @user.favorites.includes(:post).map(&:post)
   end
 
   private
 
-  def post_params
-    params.require(:post).permit(:first_memo)
+  def correct_user
+    @user = User.find(params[:id])
+    unless @user == current_user
+      flash[:alert] = "アクセス権限がありません。"
+      redirect_to public_user_path(current_user)
+    end
   end
 
   def user_params

@@ -37,9 +37,9 @@ class Public::PostsController < ApplicationController
     if request.patch?
       if @post.update(post_params)
         if params[:next_step] && params[:next_step] == 'true'
-          redirect_to third_memo_public_post_path(@post) # third_memoの画面に遷移
+          redirect_to third_memo_public_post_path(@post) 
         else
-          redirect_to public_user_path(current_user) # 通常の更新
+          redirect_to public_user_path(current_user) 
         end
       else
         render :second_memo
@@ -51,7 +51,7 @@ class Public::PostsController < ApplicationController
     @post = Post.find(params[:id])
     if request.patch?
       if @post.update(post_params)
-        redirect_to public_user_path(current_user) # 完了後はマイページへ
+        redirect_to public_user_path(current_user) 
       else
         render :third_memo
       end
@@ -83,7 +83,7 @@ class Public::PostsController < ApplicationController
     @post = Post.find(params[:id])
     unless @post.user == current_user
       flash[:alert] = "権限がありません。"
-      redirect_to public_post_path  # 権限がない場合、リダイレクトさせる
+      redirect_to public_post_path
     end
   end
   

@@ -35,7 +35,9 @@ class Public::UsersController < ApplicationController
   private
 
   def correct_user
-    @user = User.find(params[:id])
+    user_id = params[:id] || params[:user_id] # id もしくは user_id を取得
+    @user = User.find(user_id)
+  
     unless @user == current_user
       flash[:alert] = "アクセス権限がありません。"
       redirect_to public_user_path(current_user)

@@ -87,6 +87,17 @@
 
     <div>
       <%= form_with(model: [@post, Comment.new], url: public_post_comments_path(@post), local: true) do |f| %>
+        <% if f.object.errors.any? %>
+          <div id="error_explanation">
+            <h2><%= pluralize(f.object.errors.count, "error") %> prevented this comment from being saved:</h2>
+            <ul>
+              <% f.object.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+              <% end %>
+            </ul>
+          </div>
+        <% end %>
+    
         <div class="form-group">
           <%= f.text_area :comment, rows: '5', class: "form-control", placeholder: "コメントをここに" %>
         </div>

@@ -1,9 +1,10 @@
-<h1>Third Memo</h1>
+<div class="container">
+  <h1>Third Memo</h1>
 
-<%= form_with model: @post, url: public_post_path(@post), method: :patch, local: true do |form| %>
-  <h4>Third Memo</h4>
-  <%= form.text_area :third_memo %>
+    <%= form_with model: @post, url: public_post_path(@post), method: :patch, local: true do |form| %>
+      <h4>Third Memo</h4>
+      <%= form.text_area :third_memo %>
 
-  <!-- 完了ボタン -->
-  <%= form.submit '完了', class: 'btn btn-success' %>
-<% end %>
+      <%= form.submit '完了', class: 'btn btn-success' %>
+    <% end %>
+</div>

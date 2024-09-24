@@ -85,7 +85,7 @@ class Public::PostsController < ApplicationController
     @post = Post.find(params[:id])
     unless @post.user == current_user
       flash[:alert] = "権限がありません。"
-      redirect_to public_post_path
+      redirect_to public_user_path(current_user)
     end
   end
   

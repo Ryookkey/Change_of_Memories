@@ -9,7 +9,6 @@
       <h4>First Memo</h4>
       <%= form.text_area :first_memo, class: 'form-control w-100 mb-4' %>
 
-      <!-- First Memo 公開・非公開選択 -->
       <h4>公開設定</h4>
       <div class="d-flex">
         <div class="mr-4">
@@ -30,3 +29,11 @@
     <% end %>
   </div>
 </div>
+
+<!-- 次に進むボタンを押した際にフラグを変更し、フォームを送信 -->
+<script>
+  document.getElementById("nextStepButton").addEventListener("click", function() {
+    document.getElementById("nextStepField").value = true;
+    document.getElementById("postForm").submit();
+  });
+</script>

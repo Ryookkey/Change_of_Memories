@@ -63,6 +63,9 @@
                 <p><%= posts.first.third_memo %></p>
               </div>
             <% end %>
+            <div class="d-flex justify-content-center">
+              <%= link_to '詳細を見る', public_post_path(posts.first), class: "btn btn-primary mt-3" %>
+            </div>
           </div>
         </div>
       </div>

@@ -11,23 +11,22 @@
     </div>
   </div>
   
-  
-  
   <div class="row mt-5 justify-content-center">
-    <%= form_with model: @post, url: public_post_path(@post), method: :patch, local: true, id: "thirdMemoForm" do |form| %>
+    <%= form_with model: @post, url: third_memo_public_post_path(@post), method: :patch, local: true do |form| %>
       <div class="col-12">
         <h4 class="text-center">Third Memo</h4>
         <%= form.text_area :third_memo, class: 'form-control w-100 mb-4', rows: 4 %>
       </div>
-      
+
+      <!-- 公開・非公開選択 -->
       <div class="d-flex">
         <div class="mr-4">
-          <%= form.radio_button :first_post_status, true, id: "first_post_status_public" %>
-          <label for="first_post_status_public">公開</label>
+          <%= form.radio_button :third_post_status, true, id: "third_post_status_public" %>
+          <label for="third_post_status_public">公開</label>
         </div>
         <div>
-          <%= form.radio_button :first_post_status, false, id: "first_post_status_private" %>
-          <label for="first_post_status_private">非公開</label>
+          <%= form.radio_button :third_post_status, false, id: "third_post_status_private" %>
+          <label for="third_post_status_private">非公開</label>
         </div>
       </div>
 

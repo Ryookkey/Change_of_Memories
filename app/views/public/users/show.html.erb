@@ -17,9 +17,11 @@
         </div>
       </div>
 
-      <div>
-        <%= link_to 'プロフィール編集', edit_public_user_path, class: "btn btn-primary mb-2" %>
-      </div>
+      <% if current_user == @user %>
+        <div>
+          <%= link_to 'プロフィール編集', edit_public_user_path, class: "btn btn-primary mb-2" %>
+        </div>
+      <% end %>
 
       <% if current_user != @user %>
         <% if current_user.following?(@user) %>

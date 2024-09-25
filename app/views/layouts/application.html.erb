@@ -52,7 +52,19 @@
               <%= f.submit "検索", class: "btn btn-primary" %>
             <% end %>
           </div>
-
+        <% elsif admin_signed_in? %>
+          <li>
+            ユーザ一覧
+          </li>
+          <li>
+            コメント一覧
+          </li>
+          <li>
+            投稿一覧
+          </li>
+          <li>
+            <%= link_to "ログアウト", destroy_admin_session_path, method: :delete %>
+          </li>
         <% else %>
           <li>
             <%= link_to "新規登録", new_user_registration_path %>

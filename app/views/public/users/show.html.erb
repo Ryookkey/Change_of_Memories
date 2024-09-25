@@ -8,7 +8,7 @@
 
     <div class="col-md-6">
       <h4><%= @user.name %></h4>
-
+      <p><%= simple_format(@user.introduction.present? ? @user.introduction : "よろしくお願いします。") %></p>
       <div class="d-flex mb-2">
         <div class="mr-4">
           フォロー数: <%= link_to @user.followings.count, public_user_followings_path(@user) %>
@@ -30,52 +30,64 @@
     </div>
   </div>
 
-  <div class="row">
-    <% @posts.each do |group_id, posts| %>
-      <div class="col-md-5 mb-5">
-        <div class="card">
-          <div class="card-body">
-            <div class="d-flex align-items-center">
-              <div class="mr-3">
-                <%= image_tag @user.get_profile_image, class: "rounded-circle", width: 50, height: 50 %>
+  <% if @posts.any? %>
+    <div class="row">
+      <% @posts.each do |group_id, posts| %>
+        <div class="col-md-5 mb-5">
+          <div class="card">
+            <div class="card-body">
+              <div class="d-flex align-items-center">
+                <div class="mr-3">
+                  <%= image_tag @user.get_profile_image, class: "rounded-circle", width: 50, height: 50 %>
+                </div>
+                <div>
+                  <h5 class="card-title mb-1"><%= @user.name %></h5>
+                  <p class="text-muted mb-1"><%= posts.first.created_at.strftime('%Y/%m/%d %H:%M') %></p>
+                </div>
               </div>
-              <div>
-                <h5 class="card-title mb-1"><%= @user.name %></h5>
-                <p class="text-muted mb-1"><%= posts.first.created_at.strftime('%Y/%m/%d %H:%M') %></p>
-              </div>
-            </div>
 
-            <!-- First Memo -->
-            <div class="mt-3">
-              <h5>First Memo</h5>
-              <p><%= posts.first.first_memo %></p>
-              <%= button_tag posts.first.first_post_status ? "公開" : "非公開", class: posts.first.first_post_status ? 'btn btn-success btn-sm' : 'btn btn-danger btn-sm' %>
-            </div>
-
-            <!-- Second Memo -->
-            <% if posts.first.second_memo.present? %>
+              <!-- グループ全体のタイトル表示 -->
               <div class="mt-3">
-                <h5>Second Memo</h5>
-                <p><%= posts.first.second_memo %></p>
-                <%= button_tag posts.first.second_post_status ? "公開" : "非公開", class: posts.first.second_post_status ? 'btn btn-success btn-sm' : 'btn btn-danger btn-sm' %>
+                <h5>タイトル</h5>
+                <p><%= posts.first.title.present? ? posts.first.title : '未記入です' %></p>
               </div>
-            <% end %>
 
-            <!-- Third Memo -->
-            <% if posts.first.third_memo.present? %>
+              <!-- First Memo -->
               <div class="mt-3">
-                <h5>Third Memo</h5>
-                <p><%= posts.first.third_memo %></p>
-                <%= button_tag posts.first.third_post_status ? "公開" : "非公開", class: posts.first.third_post_status ? 'btn btn-success btn-sm' : 'btn btn-danger btn-sm' %>
+                <h5>First Memo</h5>
+                <p><%= posts.first.first_memo %></p>
+                <%= button_tag posts.first.first_post_status ? "公開" : "非公開", class: posts.first.first_post_status ? 'btn btn-success btn-sm' : 'btn btn-danger btn-sm' %>
               </div>
-            <% end %>
 
-            <div class="d-flex justify-content-center">
-              <%= link_to '詳細を見る', public_post_path(posts.first), class: "btn btn-primary mt-3" %>
+              <!-- Second Memo -->
+              <% if posts.first.second_memo.present? %>
+                <div class="mt-3">
+                  <h5>Second Memo</h5>
+                  <p><%= posts.first.second_memo %></p>
+                  <%= button_tag posts.first.second_post_status ? "公開" : "非公開", class: posts.first.second_post_status ? 'btn btn-success btn-sm' : 'btn btn-danger btn-sm' %>
+                </div>
+              <% end %>
+
+              <!-- Third Memo -->
+              <% if posts.first.third_memo.present? %>
+                <div class="mt-3">
+                  <h5>Third Memo</h5>
+                  <p><%= posts.first.third_memo %></p>
+                  <%= button_tag posts.first.third_post_status ? "公開" : "非公開", class: posts.first.third_post_status ? 'btn btn-success btn-sm' : 'btn btn-danger btn-sm' %>
+                </div>
+              <% end %>
+
+              <div class="d-flex justify-content-center">
+                <%= link_to '詳細を見る', public_post_path(posts.first), class: "btn btn-primary mt-3" %>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    <% end %>
-  </div>
+      <% end %>
+    </div>
+  <% else %>
+    <div class="text-center mt-5">
+      <h5>まだ投稿がありません。</h5>
+    </div>
+  <% end %>
 </div>

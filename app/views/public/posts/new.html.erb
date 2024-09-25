@@ -7,7 +7,7 @@
   <div class="row mt-5 justify-content-center">
     <%= form_with model: @post, url: public_posts_path, local: true, id: "postForm" do |form| %>
       <h4>First Memo</h4>
-      <%= form.text_area :first_memo, class: 'form-control w-100 mb-4' %>
+      <%= form.text_area :first_memo, class: 'form-control w-100 mb-4', required: true %> <!-- requiredを追加 -->
 
       <h4>公開設定</h4>
       <div class="d-flex">
@@ -33,7 +33,13 @@
 <!-- 次に進むボタンを押した際にフラグを変更し、フォームを送信 -->
 <script>
   document.getElementById("nextStepButton").addEventListener("click", function() {
-    document.getElementById("nextStepField").value = true;
-    document.getElementById("postForm").submit();
+    const firstMemoField = document.querySelector("#post_first_memo");
+
+    if (!firstMemoField.value.trim()) {
+      alert("First Memoは必須です");
+    } else {
+      document.getElementById("nextStepField").value = true;
+      document.getElementById("postForm").submit();
+    }
   });
 </script>

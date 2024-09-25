@@ -2,7 +2,7 @@
   <div class="row mt-5">
     <h1 class="text-center">Third Memo</h1>
   </div><br>
-  <h5>第三のメモです。<br>前画面ではfirst memoの内容を踏まえて、抽象化を行いました。<br>抽象化を行ったことで、気付けるアイディアが出てきます！<br>忘れないようにメモしましょう！<br></h5>
+  <h5>第三のメモです。<br>前画面ではfirst memoの内容を踏まえて、抽象化を行いました。<br>抽象化を行ったことで、気付けるアイディアが出てきます！<br>忘れないようにメモしましょう！<br>また、これまでの３つのメモの内容を踏まえてタイトルを付けると後で見返しやすくなります！</h5>
 
   <div class="row mt-5 justify-content-center">
     <div class="col-12 text-center">
@@ -15,6 +15,12 @@
 
   <div class="row mt-5 justify-content-center">
     <%= form_with model: @post, url: third_memo_public_post_path(@post), method: :patch, local: true do |form| %>
+      <!-- タイトル入力フォームを追加 -->
+      <div class="col-12">
+        <h4 class="text-center">タイトル</h4>
+        <%= form.text_field :title, class: 'form-control w-100 mb-4', placeholder: "タイトル（任意）" %>
+      </div>
+
       <div class="col-12">
         <h4 class="text-center">Third Memo</h4>
         <%= form.text_area :third_memo, class: 'form-control w-100 mb-4', rows: 4 %>

@@ -1,13 +1,13 @@
 class Public::PostsController < ApplicationController
-  before_action :authenticate_user!  
-  before_action :correct_user, only: [:edit, :update, :destroy]  
-  
+  before_action :authenticate_user!
+  before_action :correct_user, only: [:edit, :update, :destroy]
+
   def new
     @post = Post.new
   end
 
   def index
-    @posts = Post.where("first_post_status = ? OR second_post_status = ? OR third_post_status = ?", true, true, true)
+    @posts = Post.where("user_id = ? OR (first_post_status = ? OR second_post_status = ? OR third_post_status = ?)", current_user.id, true, true, true)
     @post = Comment.new
   end
 
@@ -39,21 +39,21 @@ class Public::PostsController < ApplicationController
     if request.patch?
       if @post.update(post_params)
         if params[:next_step] && params[:next_step] == 'true'
-          redirect_to third_memo_public_post_path(@post) 
+          redirect_to third_memo_public_post_path(@post)
         else
-          redirect_to public_user_path(current_user) 
+          redirect_to public_user_path(current_user)
         end
       else
         render :second_memo
       end
     end
   end
-  
+
   def third_memo
     @post = Post.find(params[:id])
     if request.patch?
       if @post.update(post_params)
-        redirect_to public_user_path(current_user) 
+        redirect_to public_user_path(current_user)
       else
         render :third_memo
       end
@@ -88,7 +88,7 @@ class Public::PostsController < ApplicationController
       redirect_to public_user_path(current_user)
     end
   end
-  
+
   def post_params
     params.require(:post).permit(:first_memo, :second_memo, :third_memo, :first_post_status, :second_post_status, :third_post_status)
   end

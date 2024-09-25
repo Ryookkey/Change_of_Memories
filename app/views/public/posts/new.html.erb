@@ -2,7 +2,7 @@
   <div class="row mt-5">
     <h1>First Memo</h1>
   </div>
-  <h5>第一のメモです。<br>自身が感銘受けたものや、忘れたくないもの、メモしておきたいものを記載しましょう！</h5>
+  <h5>第一のメモです。<br>感銘を受けたこと、忘れたくないことなどを記載しましょう。</h5>
 
   <div class="row mt-5 justify-content-center">
     <%= form_with model: @post, url: public_posts_path, local: true, id: "postForm" do |form| %>
@@ -22,9 +22,9 @@
       </div>
 
       <div class="d-flex justify-content-between mt-3 w-100">
-        <%= form.submit "新規投稿　　　　　　　　　　　　 (マイページ)", class: 'btn btn-secondary w-50 mr-2 text-wrap', style: 'white-space: pre-line;' %>
+        <%= form.submit "新規投稿", class: 'btn btn-secondary w-50 mr-2 text-wrap' %>
         <%= hidden_field_tag :next_step, false, id: "nextStepField" %>
-        <%= button_tag '次に進む<br>(second memo)'.html_safe, type: 'button', class: 'btn btn-primary w-50', id: "nextStepButton" %>
+        <%= button_tag '次に進む (second memo)', type: 'button', class: 'btn btn-primary w-50', id: "nextStepButton" %>
       </div>
     <% end %>
   </div>

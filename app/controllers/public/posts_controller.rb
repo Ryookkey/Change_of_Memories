@@ -30,6 +30,7 @@ class Public::PostsController < ApplicationController
         redirect_to public_user_path(current_user)
       end
     else
+      flash[:alert] = "投稿に失敗しました。入力内容をご確認ください。"
       render :new
     end
   end
@@ -90,6 +91,6 @@ class Public::PostsController < ApplicationController
   end
 
   def post_params
-    params.require(:post).permit(:first_memo, :second_memo, :third_memo, :first_post_status, :second_post_status, :third_post_status)
+    params.require(:post).permit(:title, :first_memo, :second_memo, :third_memo, :first_post_status, :second_post_status, :third_post_status)
   end
 end

@@ -17,18 +17,27 @@
                 </div>
               </div>
 
-              <h5>・first memo</h5>
+              <!-- タイトル表示 -->
+              <h5>タイトル</h5>
+              <p><%= post.title.present? ? post.title : '未記入です' %></p>
+
+              <h5>・First Memo</h5>
               <h5 class="card-title"><%= link_to post.first_memo, public_post_path(post) %></h5>
 
-              <h5>・second memo</h5>
+              <h5>・Second Memo</h5>
               <% if post.second_memo.present? %>
                 <h5 class="card-title"><%= link_to post.second_memo, public_post_path(post) %></h5>
               <% end %>
 
-              <h5>・third memo</h5>
+              <h5>・Third Memo</h5>
               <% if post.third_memo.present? %>
                 <h5 class="card-title"><%= link_to post.third_memo, public_post_path(post) %></h5>
               <% end %>
+
+              <!-- いいね数をThird Memoの下に配置 -->
+              <div class="mt-3">
+                <span>♥<%= post.favorites.count %> いいね</span>
+              </div>
             </div>
           </div>
         </div>

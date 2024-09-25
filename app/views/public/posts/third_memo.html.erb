@@ -15,7 +15,6 @@
 
   <div class="row mt-5 justify-content-center">
     <%= form_with model: @post, url: third_memo_public_post_path(@post), method: :patch, local: true do |form| %>
-      <!-- タイトル入力フォームを追加 -->
       <div class="col-12">
         <h4 class="text-center">タイトル</h4>
         <%= form.text_field :title, class: 'form-control w-100 mb-4', placeholder: "タイトル（任意）" %>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_09_17_082304) do
+ActiveRecord::Schema.define(version: 2024_09_25_041021) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -85,9 +85,11 @@ ActiveRecord::Schema.define(version: 2024_09_17_082304) do
     t.text "first_memo"
     t.text "second_memo"
     t.text "third_memo"
-    t.boolean "post_status"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.boolean "first_post_status", default: false, null: false
+    t.boolean "second_post_status", default: false, null: false
+    t.boolean "third_post_status", default: false, null: false
     t.index ["group_id"], name: "index_posts_on_group_id"
     t.index ["user_id"], name: "index_posts_on_user_id"
   end

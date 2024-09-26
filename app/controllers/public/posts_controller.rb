@@ -1,19 +1,26 @@
 class Public::PostsController < ApplicationController
-  before_action :authenticate_user!  
-  before_action :correct_user, only: [:edit, :update, :destroy]  
-  
+  before_action :authenticate_user!
+  before_action :correct_user, only: [:edit, :update, :destroy]
+
   def new
     @post = Post.new
   end
 
   def index
-    @posts = Post.all
+  # 公開されている投稿だけを取得（または自分自身の投稿も取得）
+    @posts = Post.where("user_id = ? OR (first_post_status = ? OR second_post_status = ? OR third_post_status = ?)", current_user.id, true, true, true)
+                 .page(params[:page])
+                 .per(2)
+
     @post = Comment.new
   end
+
+
 
   def show
     @post = Post.find(params[:id])
     @post_comment = Post.new
+    @posts = current_user.posts
   end
 
   def create
@@ -28,6 +35,7 @@ class Public::PostsController < ApplicationController
         redirect_to public_user_path(current_user)
       end
     else
+      flash[:alert] = "投稿に失敗しました。入力内容をご確認ください。"
       render :new
     end
   end
@@ -37,21 +45,21 @@ class Public::PostsController < ApplicationController
     if request.patch?
       if @post.update(post_params)
         if params[:next_step] && params[:next_step] == 'true'
-          redirect_to third_memo_public_post_path(@post) # third_memoの画面に遷移
+          redirect_to third_memo_public_post_path(@post)
         else
-          redirect_to public_user_path(current_user) # 通常の更新
+          redirect_to public_user_path(current_user)
         end
       else
         render :second_memo
       end
     end
   end
-  
+
   def third_memo
     @post = Post.find(params[:id])
     if request.patch?
       if @post.update(post_params)
-        redirect_to public_user_path(current_user) # 完了後はマイページへ
+        redirect_to public_user_path(current_user)
       else
         render :third_memo
       end
@@ -83,11 +91,11 @@ class Public::PostsController < ApplicationController
     @post = Post.find(params[:id])
     unless @post.user == current_user
       flash[:alert] = "権限がありません。"
-      redirect_to public_post_path  # 権限がない場合、リダイレクトさせる
+      redirect_to public_user_path(current_user)
     end
   end
-  
+
   def post_params
-    params.require(:post).permit(:first_memo, :second_memo, :third_memo)
+    params.require(:post).permit(:title, :first_memo, :second_memo, :third_memo, :first_post_status, :second_post_status, :third_post_status)
   end
 end

@@ -4,8 +4,7 @@ class Public::UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    # @postsにはページネーションされた結果をそのまま渡す
-    @posts = @user.posts.page(params[:page]).per(10)
+    @posts = @user.posts.page(params[:page]).per(2)
   end
 
   def edit

@@ -4,7 +4,8 @@ class Public::UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    @posts = @user.posts.group_by(&:group_id)
+    # @postsにはページネーションされた結果をそのまま渡す
+    @posts = @user.posts.page(params[:page]).per(10)
   end
 
   def edit
@@ -33,13 +34,14 @@ class Public::UsersController < ApplicationController
 
   def favorites
     @user = current_user
-    @favorite_posts = @user.favorites.includes(:post).map(&:post)
+    @favorite_posts = Post.joins(:favorites).where(favorites: { user_id: current_user.id })
+                          .page(params[:page]).per(3)
   end
 
   private
 
   def correct_user
-    user_id = params[:id] || params[:user_id] # id もしくは user_id を取得
+    user_id = params[:id] || params[:user_id]
     @user = User.find(user_id)
   end
 

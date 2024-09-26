@@ -2,10 +2,8 @@
   <h1>投稿一覧</h1>
 
   <div class="row">
-    <% published_posts = @posts.select { |post| post.first_post_status || post.second_post_status || post.third_post_status } %> <!-- 公開された投稿を選別 -->
-
-    <% if published_posts.any? %>
-      <% published_posts.each do |post| %>
+    <% if @posts.any? %>
+      <% @posts.each do |post| %>
         <div class="col-md-6 mb-5">
           <div class="card">
             <div class="card-body">
@@ -23,12 +21,11 @@
                 <p><%= post.title.present? ? post.title : '未記入です' %></p>
               </div>
 
-              <!-- 公開されたメモのみ表示 -->
+              <!-- First Memo -->
+              <h5 class="card-title mb-3 text-left">First Memo</h5>
               <% if post.first_post_status || post.user == current_user %>
-                <h5 class="card-title mb-3 text-left">First Memo</h5>
                 <p class="mb-4"><%= post.first_memo %></p>
               <% else %>
-                <h5 class="card-title mb-3 text-left">First Memo</h5>
                 <p>このメモは非公開です。</p>
               <% end %>
 
@@ -74,5 +71,9 @@
         <h5>投稿がありません。</h5>
       </div>
     <% end %>
+  </div>
+
+  <div class="row justify-content-center">
+    <h5><%= paginate @posts %></h5>
   </div>
 </div>

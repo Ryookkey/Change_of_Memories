@@ -5,6 +5,13 @@
   <h5>抽象化を行い、次のメモへ進むための準備をしましょう。</h5>
 
   <div class="row mt-5 justify-content-center">
+    <div class="col-12 text-center">
+      <h5>First Memo</h5>
+      <p><%= @post.first_memo %></p>
+    </div>
+  </div>
+
+  <div class="row mt-5 justify-content-center">
     <%= form_with model: @post, url: second_memo_public_post_path(@post), method: :patch, local: true, id: "secondMemoForm" do |form| %>
       <div class="col-8 offset-md-1">
         <h4>Second Memo</h4>

@@ -7,9 +7,14 @@ class Public::PostsController < ApplicationController
   end
 
   def index
+  # 公開されている投稿だけを取得（または自分自身の投稿も取得）
     @posts = Post.where("user_id = ? OR (first_post_status = ? OR second_post_status = ? OR third_post_status = ?)", current_user.id, true, true, true)
+                 .page(params[:page])
+                 .per(2)
+
     @post = Comment.new
   end
+
 
 
   def show

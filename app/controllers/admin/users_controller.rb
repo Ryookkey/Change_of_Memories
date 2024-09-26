@@ -1,17 +1,18 @@
 class Admin::UsersController < ApplicationController
   def index
-    @users = User.all # すべてのユーザーを取得
+    @users = User.all
   end
 
   def show
-    @user = User.find(params[:id]) # 特定のユーザー情報を取得
+    @user = User.find(params[:id])
     @users = User.all
     @posts = @user.posts
   end
-  
+
   def destroy
-    post = Post.find(params[:id])
-    post.destroy
-    redirect_to public_user_path(current_user)
+    @user = User.find(params[:id])
+    @user.destroy
+    flash[:notice] = "ユーザーを退会させました。"
+    redirect_to admin_users_path
   end
 end

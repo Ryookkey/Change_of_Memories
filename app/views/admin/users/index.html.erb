@@ -9,16 +9,20 @@
         <th>投稿数</th>
         <th>フォロー数</th>
         <th>フォロワー数</th>
+        <th></th>
       </tr>
     </thead>
     <tbody>
       <% @users.each do |user| %>
         <tr>
           <td><%= user.id %></td>
-          <td><%= link_to user.name, admin_user_path(user) %></td> <!-- ここでリンクを追加 -->
+          <td><%= link_to user.name, admin_user_path(user) %></td> <!-- ユーザ詳細リンク -->
           <td><%= user.posts.count %></td>
           <td><%= user.followings.count %></td>
           <td><%= user.followers.count %></td>
+          <td>
+            <%= link_to '退会', admin_user_path(user), method: :delete, data: { confirm: 'このユーザーを退会させてもよろしいですか？' }, class: 'btn btn-danger' %>
+          </td>
         </tr>
       <% end %>
     </tbody>

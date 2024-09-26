@@ -45,4 +45,34 @@
       </div>
     </div>
   </div>
+
+  <!-- コメント表示エリア -->
+  <div>
+    <h4>コメント一覧</h4>
+    <% if @post.comments.any? %>
+      <div class="mt-4">
+        <% @post.comments.each do |comment| %>
+          <div class="card mb-3">
+            <div class="card-body">
+              <div class="d-flex align-items-center mb-2">
+                <%= image_tag comment.user.get_profile_image, class: "rounded-circle mr-3", width: 50, height: 50 %>
+                <div>
+                  <h5 class="card-title mb-1"><%= comment.user.name %></h5>
+                  <p class="text-muted mb-1"><%= comment.created_at.strftime('%Y/%m/%d %H:%M') %></p>
+                </div>
+              </div>
+              <p class="card-text"><%= comment.comment %></p>
+
+              <!-- コメント削除ボタン -->
+              <div class="d-flex justify-content-end">
+                <%= link_to 'コメント削除', admin_comment_path(comment), method: :delete, data: { confirm: 'このコメントを削除してもよろしいですか？' }, class: 'btn btn-danger btn-sm' %>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    <% else %>
+      <p>まだコメントがありません。</p>
+    <% end %>
+  </div>
 </div>

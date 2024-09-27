@@ -12,16 +12,15 @@ class Post < ApplicationRecord
 
   def self.looks(search, word)
     if search == "perfect_match"
-      @post = Post.where("first_memo LIKE?", "#{word}")
+      @post = Post.where("first_memo LIKE ?", "#{word}").where(first_post_status: true)
     elsif search == "forward_match"
-      @post = Post.where("first_memo LIKE?", "#{word}")
+      @post = Post.where("first_memo LIKE ?", "#{word}%").where(first_post_status: true)
     elsif search == "backward_match"
-      @post = Post.where("first_memo LIKE?", "#{word}")
-    elsif search == "partia_match"
-      @post = Post.where("first_memo LIKE?", "#{word}")
+      @post = Post.where("first_memo LIKE ?", "%#{word}").where(first_post_status: true)
+    elsif search == "partial_match"
+      @post = Post.where("first_memo LIKE ?", "%#{word}%").where(first_post_status: true)
     else
-      @post = Post.all
+      @post = Post.where(first_post_status: true)
     end
   end
-
 end

@@ -7,11 +7,9 @@
       <% @users.each do |user| %>
         <tr>
           <td class="d-flex align-items-center">
-            <!-- プロフィール画像 -->
             <%= image_tag user.get_profile_image, class: "rounded-circle", width: 50, height: 50 %>
             &nbsp;&nbsp;
 
-            <!-- ユーザー名 -->
             <%= link_to user.name, public_user_path(user), method: :get, class: "ml-3" %>
           </td>
         </tr>
@@ -23,15 +21,12 @@
       <% @posts.each do |post| %>
         <tr>
           <td class="d-flex align-items-center">
-            <!-- 投稿者のプロフィール画像 -->
             <%= image_tag post.user.get_profile_image, class: "rounded-circle", width: 50, height: 50 %>
             &nbsp;&nbsp;
 
-            <!-- 投稿者の名前 -->
             <%= link_to post.user.name, public_user_path(post.user), method: :get, class: "ml-3" %>
             &nbsp;&nbsp;
 
-            <!-- メモの内容 -->
             <%= link_to post.first_memo, public_post_path(post), class: "ml-3" %>
           </td>
         </tr>

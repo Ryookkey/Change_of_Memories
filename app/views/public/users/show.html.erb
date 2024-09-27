@@ -12,6 +12,7 @@
 
         <div>
           <h4><%= @user.name %></h4>
+          <h5><%= simple_format(@user.introduction.present? ? @user.introduction : "よろしくお願いします。") %></h5>
           <div class="d-flex mb-2">
             <div class="mr-4">
               フォロー数: <%= link_to @user.followings.count, public_user_followings_path(@user) %>

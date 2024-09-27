@@ -46,8 +46,10 @@ class Public::PostsController < ApplicationController
     if request.patch?
       if @post.update(post_params)
         if params[:next_step] && params[:next_step] == 'true'
+          flash[:notice] = "Second Memoの投稿に成功しました。こちらはThird Memoです。"
           redirect_to third_memo_public_post_path(@post)
         else
+          flash[:notice] = "Second Memoが投稿されました"
           redirect_to public_user_path(current_user)
         end
       else
@@ -60,6 +62,7 @@ class Public::PostsController < ApplicationController
     @post = Post.find(params[:id])
     if request.patch?
       if @post.update(post_params)
+        flash[:notice] = "Third Memoが投稿されました"
         redirect_to public_user_path(current_user)
       else
         render :third_memo
@@ -83,6 +86,7 @@ class Public::PostsController < ApplicationController
   def destroy
     post = Post.find(params[:id])
     post.destroy
+    flash[:alert] = "投稿が削除されました。"
     redirect_to public_user_path(current_user)
   end
 

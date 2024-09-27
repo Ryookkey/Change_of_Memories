@@ -20,6 +20,7 @@ class Public::UsersController < ApplicationController
     if @user == current_user && @user.update(user_params)
       redirect_to public_user_path(@user), notice: "プロフィールを更新しました。"
     else
+      flash[:alert] = "ご利用できない画像です。 ご利用いただける画像ファイルはpng、jpg、jpeg形式で4MB以下になります。 今一度ご確認をお願いします。"
       render :edit
     end
   end

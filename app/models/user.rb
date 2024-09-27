@@ -11,6 +11,9 @@ class User < ApplicationRecord
 
   has_one_attached :profile_image
 
+  validates :profile_image, content_type: {in:[:png, :jpg, :jpeg], message: "はpng, jpg, jpegいずれかの形式にして下さい"},
+                                  size: { between: 1.kilobyte..4.megabytes , message: '画像容量が大きいです。4megabytes以下でお願いいたします' }
+
   GUEST_USER_EMAIL = "guest@example.com"
 
   def guest_user?

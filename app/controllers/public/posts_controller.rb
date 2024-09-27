@@ -11,7 +11,6 @@ class Public::PostsController < ApplicationController
     @posts = Post.where("user_id = ? OR (first_post_status = ? OR second_post_status = ? OR third_post_status = ?)", current_user.id, true, true, true)
                  .page(params[:page])
                  .per(2)
-
     @post = Comment.new
   end
 
@@ -30,8 +29,10 @@ class Public::PostsController < ApplicationController
 
     if @post.save
       if params[:next_step] && params[:next_step] == 'true'
+        flash[:notice] = "First Memoの投稿に成功しました。こちらはSecond Memoです。"
         redirect_to second_memo_public_post_path(@post)
       else
+        flash[:notice] = "First Memoが投稿されました"
         redirect_to public_user_path(current_user)
       end
     else

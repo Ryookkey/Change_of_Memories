@@ -16,11 +16,13 @@
       <!-- First Memo -->
       <div class="mt-2">
         <h6>First Memo</h6>
+        
         <% if @post.first_post_status || @post.user == current_user %>
           <p><%= @post.first_memo %></p>
         <% else %>
           <p>このメモは非公開です。</p>
         <% end %>
+        
         <% if @post.user == current_user %>
           <%= button_tag @post.first_post_status ? "公開" : "非公開", class: @post.first_post_status ? 'btn btn-success btn-sm' : 'btn btn-danger btn-sm' %>
         <% end %>
@@ -30,11 +32,13 @@
       <% if @post.second_memo.present? %>
         <div class="mt-2">
           <h6>Second Memo</h6>
+          
           <% if @post.second_post_status || @post.user == current_user %>
             <p><%= @post.second_memo %></p>
           <% else %>
             <p>このメモは非公開です。</p>
           <% end %>
+          
           <% if @post.user == current_user %>
             <%= button_tag @post.second_post_status ? "公開" : "非公開", class: @post.second_post_status ? 'btn btn-success btn-sm' : 'btn btn-danger btn-sm' %>
           <% end %>
@@ -43,20 +47,22 @@
 
       <!-- Third Memo -->
       <% if @post.third_memo.present? %>
-        <div class="mt-2"> <!-- 余白を狭めました -->
+        <div class="mt-2">
           <h6>Third Memo</h6>
+          
           <% if @post.third_post_status || @post.user == current_user %>
             <p><%= @post.third_memo %></p>
           <% else %>
             <p>このメモは非公開です。</p>
           <% end %>
+          
           <% if @post.user == current_user %>
             <%= button_tag @post.third_post_status ? "公開" : "非公開", class: @post.third_post_status ? 'btn btn-success btn-sm' : 'btn btn-danger btn-sm' %>
           <% end %>
         </div>
       <% end %>
 
-      <!-- 編集と削除ボタンは投稿者のみ表示 -->
+      <!-- 投稿者のみ表示 -->
       <div class="mt-3">
         <% if @post.user == current_user %>
           <%= link_to '編集する', edit_public_post_path(@post), class: "btn btn-info mr-2" %>
@@ -68,7 +74,7 @@
 
   <!-- コメント表示といいね機能 -->
   <div>
-    <div class="d-flex justify-content-start align-items-center mt-1"> <!-- コメント数の上の余白を狭めました -->
+    <div class="d-flex justify-content-start align-items-center mt-1">
       <p class="mr-3">コメント件数: <%= @post.comments.count %></p>
 
       <% if @post.favorited_by?(current_user) %>

@@ -18,7 +18,7 @@ module Public
         comment.destroy
         redirect_to public_post_path(post), notice: 'コメントが削除されました。'
       else
-        redirect_to public_post_path(@post), alert: 'コメントを削除する権限がありません。'
+        redirect_to public_post_path(@post), alert: 'コメントの削除権限がありません。'
       end
     end
 

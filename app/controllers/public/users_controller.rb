@@ -1,6 +1,6 @@
 class Public::UsersController < ApplicationController
   before_action :authenticate_user!, except: [:show]
-  before_action :correct_user, only: [:show, :edit, :update, :favorites]
+  before_action :correct_user, only: [:edit, :update, :favorites]
 
   def show
     @user = User.find(params[:id])
@@ -9,10 +9,6 @@ class Public::UsersController < ApplicationController
 
   def edit
     @user = User.find(params[:id])
-    if @user != current_user
-      flash[:alert] = "他のユーザーのプロフィールは編集できません。"
-      redirect_to public_user_path(@user)
-    end
   end
 
   def update
@@ -41,8 +37,11 @@ class Public::UsersController < ApplicationController
   private
 
   def correct_user
-    user_id = params[:id] || params[:user_id]
-    @user = User.find(user_id)
+    @user = User.find(params[:id] || params[:user_id])
+    unless @user == current_user
+      flash[:alert] = "他のユーザーのプロフィールは編集できません。"
+      redirect_to public_user_path(current_user)
+    end
   end
 
   def user_params

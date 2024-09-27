@@ -10,6 +10,7 @@ class Post < ApplicationRecord
     favorites.exists?(user_id: user.id)
   end
 
+  # 投稿内容の検索
   def self.looks(search, word)
     if search == "perfect_match"
       @post = Post.where("first_memo LIKE ?", "#{word}").where(first_post_status: true)

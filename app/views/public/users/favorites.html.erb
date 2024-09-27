@@ -17,7 +17,6 @@
                 </div>
               </div>
 
-              <!-- タイトル表示 -->
               <h5>タイトル</h5>
               <p><%= post.title.present? ? post.title : '未記入です' %></p>
 
@@ -34,7 +33,6 @@
                 <h5 class="card-title"><%= link_to post.third_memo, public_post_path(post) %></h5>
               <% end %>
 
-              <!-- いいね数をThird Memoの下に配置 -->
               <div class="mt-3">
                 <span>♥<%= post.favorites.count %> いいね</span>
               </div>

@@ -54,13 +54,13 @@
           </div>
         <% elsif admin_signed_in? %>
           <li>
-            ユーザ一覧
+            <%= link_to "ユーザ一覧", admin_users_path %>
           </li>
           <li>
             <%= link_to "コメント一覧", admin_comments_path %>
           </li>
           <li>
-            投稿一覧
+            <%= link_to "投稿一覧", admin_posts_path %>
           </li>
           <li>
             <%= link_to "ログアウト", destroy_admin_session_path, method: :delete %>

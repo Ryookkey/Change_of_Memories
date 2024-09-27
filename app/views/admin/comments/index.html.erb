@@ -1,0 +1,30 @@
+<div class="container mt-5">
+  <h2>コメント一覧</h2>
+
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>ユーザー名</th>
+        <th>コメント内容</th>
+        <th>投稿元</th>
+        <th>操作</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @comments.each do |comment| %>
+        <tr>
+          <td><%= link_to comment.user.name, public_user_path(comment.user) %></td>
+          <td><%= comment.comment %></td>
+          <td><%= link_to "投稿を見る", admin_post_path(comment.post) %></td>
+          <td>
+            <%= link_to "削除", admin_comment_path(comment), method: :delete, data: { confirm: "本当に削除しますか？" }, class: "btn btn-danger btn-sm" %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <div class="d-flex justify-content-center">
+    <%= paginate @comments %>
+  </div>
+</div>

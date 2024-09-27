@@ -16,7 +16,7 @@
       <% @users.each do |user| %>
         <tr>
           <td><%= user.id %></td>
-          <td><%= link_to user.name, admin_user_path(user) %></td> <!-- ユーザ詳細リンク -->
+          <td><%= link_to user.name, admin_user_path(user) %></td>
           <td><%= user.posts.count %></td>
           <td><%= user.followings.count %></td>
           <td><%= user.followers.count %></td>
@@ -27,4 +27,7 @@
       <% end %>
     </tbody>
   </table>
+  <div class="d-flex justify-content-center">
+    <%= paginate @users %>
+  </div>
 </div>

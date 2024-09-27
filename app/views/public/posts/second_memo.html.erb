@@ -31,10 +31,8 @@
       </div>
 
       <div class="d-flex justify-content-between mt-3 w-100">
-        <!-- CSSでボタン内の改行を実現 -->
         <%= form.submit '投稿 (マイページ)', class: 'btn btn-secondary w-50 mr-2 text-wrap', style: "white-space: pre-wrap;" %>
         <%= hidden_field_tag :next_step, false, id: "nextStepField" %>
-        <!-- 次に進む (third memo) の改行も同様に -->
         <%= button_tag '次に進む (third memo)', type: 'button', class: 'btn btn-primary w-50', id: "nextStepButton", style: "white-space: pre-wrap;" %>
       </div>
     <% end %>

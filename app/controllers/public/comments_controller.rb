@@ -16,7 +16,7 @@ module Public
       comment = post.comments.find(params[:id])
       if comment.user == current_user
         comment.destroy
-        redirect_to public_post_path(post), notice: 'コメントが削除されました。'
+        redirect_to public_post_path(post), alert: 'コメントが削除されました。'
       else
         redirect_to public_post_path(@post), alert: 'コメントの削除権限がありません。'
       end

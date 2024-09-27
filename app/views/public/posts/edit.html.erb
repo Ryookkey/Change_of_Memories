@@ -1,22 +1,37 @@
-<h1>投稿内容の編集</h1>
-
-<%= form_with model: @post, url: public_post_path(@post), method: :patch, local: true do |form| %>
-  <div class="form-group">
-    <label>First Memo</label>
-    <%= form.text_area :first_memo, class: "form-control", rows: 3 %>
+<div class="container">
+  <!-- タイトルを中央に配置 -->
+  <div class="row mt-4 mb-5 justify-content-center">
+    <h1 class="text-center">投稿内容の編集</h1>
   </div>
 
-  <div class="form-group">
-    <label>Second Memo</label>
-    <%= form.text_area :second_memo, class: "form-control", rows: 3 %>
-  </div>
+  <!-- 投稿フォームの全体を中央に配置 -->
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <%= form_with model: @post, url: public_post_path(@post), method: :patch, local: true, class: "bg-light p-4 rounded" do |form| %>
 
-  <div class="form-group">
-    <label>Third Memo</label>
-    <%= form.text_area :third_memo, class: "form-control", rows: 3 %>
-  </div>
+        <!-- First Memo -->
+        <div class="form-group mb-4">
+          <label for="first_memo" class="form-label font-weight-bold">First Memo</label>
+          <%= form.text_area :first_memo, class: "form-control", rows: 3, id: "first_memo" %>
+        </div>
 
-  <div class="mt-3">
-    <%= form.submit '更新する', class: "btn btn-primary" %>
+        <!-- Second Memo -->
+        <div class="form-group mb-4">
+          <label for="second_memo" class="form-label font-weight-bold">Second Memo</label>
+          <%= form.text_area :second_memo, class: "form-control", rows: 3, id: "second_memo" %>
+        </div>
+
+        <!-- Third Memo -->
+        <div class="form-group mb-4">
+          <label for="third_memo" class="form-label font-weight-bold">Third Memo</label>
+          <%= form.text_area :third_memo, class: "form-control", rows: 3, id: "third_memo" %>
+        </div>
+
+        <!-- 更新ボタンの上に十分な余白を設ける -->
+        <div class="text-center mt-5">
+          <%= form.submit '更新する', class: "btn btn-primary btn-lg px-5" %>
+        </div>
+      <% end %>
+    </div>
   </div>
-<% end %>
+</div>

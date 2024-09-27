@@ -11,18 +11,63 @@
         <div class="form-group mb-4">
           <label for="first_memo" class="form-label font-weight-bold">First Memo</label>
           <%= form.text_area :first_memo, class: "form-control", rows: 3, id: "first_memo" %>
+
+          <!-- First Memo 公開設定 -->
+          <div class="form-group mt-3">
+            <label class="font-weight-bold">First Memo 公開設定</label>
+            <div class="d-flex justify-content-start mt-2">
+              <div class="form-check form-check-inline">
+                <%= form.radio_button :first_post_status, true, class: "form-check-input", id: "first_public" %>
+                <label for="first_public" class="form-check-label">公開</label>
+              </div>
+              <div class="form-check form-check-inline ml-3">
+                <%= form.radio_button :first_post_status, false, class: "form-check-input", id: "first_private" %>
+                <label for="first_private" class="form-check-label">非公開</label>
+              </div>
+            </div>
+          </div>
         </div>
 
         <!-- Second Memo -->
         <div class="form-group mb-4">
           <label for="second_memo" class="form-label font-weight-bold">Second Memo</label>
           <%= form.text_area :second_memo, class: "form-control", rows: 3, id: "second_memo" %>
+
+          <!-- Second Memo 公開設定 -->
+          <div class="form-group mt-3">
+            <label class="font-weight-bold">Second Memo 公開設定</label>
+            <div class="d-flex justify-content-start mt-2">
+              <div class="form-check form-check-inline">
+                <%= form.radio_button :second_post_status, true, class: "form-check-input", id: "second_public" %>
+                <label for="second_public" class="form-check-label">公開</label>
+              </div>
+              <div class="form-check form-check-inline ml-3">
+                <%= form.radio_button :second_post_status, false, class: "form-check-input", id: "second_private" %>
+                <label for="second_private" class="form-check-label">非公開</label>
+              </div>
+            </div>
+          </div>
         </div>
 
         <!-- Third Memo -->
         <div class="form-group mb-4">
           <label for="third_memo" class="form-label font-weight-bold">Third Memo</label>
           <%= form.text_area :third_memo, class: "form-control", rows: 3, id: "third_memo" %>
+
+          <!-- Third Memo 公開設定 -->
+          <div class="form-group mt-3">
+            <label class="font-weight-bold">Third Memo 公開設定</label>
+            <div class="d-flex justify-content-start mt-2">
+              <div class="form-check form-check-inline">
+                <%= form.radio_button :third_post_status, true, class: "form-check-input", id: "third_public" %>
+                <label for="third_public" class="form-check-label">公開</label>
+              </div>
+              <div class="form-check form-check-inline ml-3">
+                <%= form.radio_button :third_post_status, false, class: "form-check-input", id: "third_private" %>
+                <label for="third_private" class="form-check-label">非公開</label>
+              </div>
+            </div>
+          </div>
         </div>
 
         <div class="text-center mt-5">

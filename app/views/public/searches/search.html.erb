@@ -1,36 +1,47 @@
-<h2>検索結果</h2>
+<div class="container mt-5">
+  <h2 class="text-center mb-4">検索結果</h2>
 
-<table class="table table-hover table-inverse">
-  <!--検索対象モデルがuserのとき-->
-  <% if @range == "User" %>
-    <tbody>
-      <% @users.each do |user| %>
-        <tr>
-          <td class="d-flex align-items-center">
-            <%= image_tag user.get_profile_image, class: "rounded-circle", width: 50, height: 50 %>
-            &nbsp;&nbsp;
+  <table class="table table-hover">
+    <!-- 検索対象がUserの場合 -->
+    <% if @range == "User" %>
+      <tbody>
+        <% @users.each do |user| %>
+          <tr>
+            <td>
+              <div class="d-flex align-items-center mb-4">
+                <div class="mr-4">
+                  <%= image_tag user.get_profile_image, class: "rounded-circle", width: 50, height: 50 %>
+                </div>
+                <div>
+                  <%= link_to user.name, public_user_path(user), class: "text-primary font-weight-bold" %>
+                </div>
+              </div>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
 
-            <%= link_to user.name, public_user_path(user), method: :get, class: "ml-3" %>
-          </td>
-        </tr>
-      <% end %>
-    </tbody>
-  <% else %>
-    <!--検索対象モデルがUserではない時(= 検索対象モデルがメモの時) -->
-    <tbody>
-      <% @posts.each do |post| %>
-        <tr>
-          <td class="d-flex align-items-center">
-            <%= image_tag post.user.get_profile_image, class: "rounded-circle", width: 50, height: 50 %>
-            &nbsp;&nbsp;
-
-            <%= link_to post.user.name, public_user_path(post.user), method: :get, class: "ml-3" %>
-            &nbsp;&nbsp;
-
-            <%= link_to post.first_memo, public_post_path(post), class: "ml-3" %>
-          </td>
-        </tr>
-      <% end %>
-    </tbody>
-  <% end %>
-</table>
+    <!-- 検索対象がメモの場合 -->
+    <% else %>
+      <tbody>
+        <% @posts.each do |post| %>
+          <tr>
+            <td>
+              <div class="d-flex align-items-center mb-4">
+                <div class="mr-4">
+                  <%= image_tag post.user.get_profile_image, class: "rounded-circle", width: 50, height: 50 %>
+                </div>
+                <div class="mr-4">
+                  <%= link_to post.user.name, public_user_path(post.user), class: "text-primary font-weight-bold" %>
+                </div>
+                <div>
+                  <%= link_to post.first_memo.truncate(50), public_post_path(post), class: "text-secondary" %>
+                </div>
+              </div>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    <% end %>
+  </table>
+</div>

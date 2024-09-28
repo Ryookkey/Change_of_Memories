@@ -1,0 +1,24 @@
+ja:
+  devise:
+    sessions:
+      signed_in: 'ログインしました。'
+      signed_out: 'ログアウトしました。'
+      already_signed_out: 'すでにログアウトしています。'
+    passwords:
+      send_instructions: 'パスワード再設定の案内を送信しました。'
+      updated: 'パスワードが変更されました。'
+      updated_not_active: 'パスワードが変更されましたが、アカウントが有効ではありません。'
+    registrations:
+      signed_up: 'アカウント登録が完了しました。'
+      signed_up_but_inactive: 'アカウント登録が完了しましたが、有効化されていません。'
+      signed_up_but_locked: 'アカウント登録が完了しましたが、アカウントがロックされています。'
+      updated: 'アカウント情報を更新しました。'
+      updated_but_not_signed_in: 'アカウント情報を更新しましたが、再ログインが必要です。'
+      destroyed: 'アカウントを削除しました。'
+    confirmations:
+      confirmed: 'アカウントが確認されました。'
+      send_instructions: '確認メールを送信しました。'
+      send_paranoid_instructions: '確認メールを送信しました。'
+    unlocks:
+      send_instructions: 'アカウントのロック解除方法を送信しました。'
+      unlocked: 'アカウントのロックが解除されました。'

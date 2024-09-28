@@ -4,7 +4,10 @@ class Public::UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    @posts = @user.posts.page(params[:page]).per(2)
+
+    sort_order = params[:sort] == 'old' ? 'created_at ASC' : 'created_at DESC'
+
+    @posts = @user.posts.order(sort_order).page(params[:page]).per(2)
   end
 
   def edit

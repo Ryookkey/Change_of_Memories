@@ -46,3 +46,17 @@
 header {
   padding: 20px 0;
 }
+
+footer {
+  text-align: center;
+  padding: 20px;
+  background-color: #f8f9fa;
+  color: #333;
+  position: relative;
+  bottom: 0;
+  width: 100%;
+}
+
+footer h5 {
+  margin: 0;
+}

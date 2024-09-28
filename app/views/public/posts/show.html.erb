@@ -1,9 +1,9 @@
-<div class="container">
-  <h1>投稿内容</h1>
+<div class="container mt-5">
+  <h1 class="mb-4">投稿内容</h1>
 
-  <div class="card mb-2">
+  <div class="card mb-4">
     <div class="card-body">
-      <div class="d-flex align-items-center">
+      <div class="d-flex align-items-center mb-4">
         <div class="mr-3">
           <%= image_tag @post.user.get_profile_image, class: "rounded-circle", width: 50, height: 50 %>
         </div>
@@ -14,9 +14,8 @@
       </div>
 
       <!-- First Memo -->
-      <div class="mt-2">
+      <div class="mt-4">
         <h6>First Memo</h6>
-
         <% if @post.first_post_status || @post.user == current_user %>
           <p><%= @post.first_memo %></p>
         <% else %>
@@ -24,15 +23,14 @@
         <% end %>
 
         <% if @post.user == current_user %>
-          <%= button_tag @post.first_post_status ? "公開" : "非公開", class: @post.first_post_status ? 'btn btn-success btn-sm' : 'btn btn-secondary btn-sm' %>
+          <%= button_tag @post.first_post_status ? "公開" : "非公開", class: @post.first_post_status ? 'btn btn-success btn-sm' : 'btn btn-secondary btn-sm', style: 'margin-top: 10px;' %>
         <% end %>
       </div>
 
       <!-- Second Memo -->
       <% if @post.second_memo.present? %>
-        <div class="mt-2">
+        <div class="mt-4">
           <h6>Second Memo</h6>
-
           <% if @post.second_post_status || @post.user == current_user %>
             <p><%= @post.second_memo %></p>
           <% else %>
@@ -40,16 +38,15 @@
           <% end %>
 
           <% if @post.user == current_user %>
-            <%= button_tag @post.second_post_status ? "公開" : "非公開", class: @post.second_post_status ? 'btn btn-success btn-sm' : 'btn btn-secondary btn-sm' %>
+            <%= button_tag @post.second_post_status ? "公開" : "非公開", class: @post.second_post_status ? 'btn btn-success btn-sm' : 'btn btn-secondary btn-sm', style: 'margin-top: 10px;' %>
           <% end %>
         </div>
       <% end %>
 
       <!-- Third Memo -->
       <% if @post.third_memo.present? %>
-        <div class="mt-2">
+        <div class="mt-4">
           <h6>Third Memo</h6>
-
           <% if @post.third_post_status || @post.user == current_user %>
             <p><%= @post.third_memo %></p>
           <% else %>
@@ -57,13 +54,12 @@
           <% end %>
 
           <% if @post.user == current_user %>
-            <%= button_tag @post.third_post_status ? "公開" : "非公開", class: @post.third_post_status ? 'btn btn-success btn-sm' : 'btn btn-secondary btn-sm' %>
+            <%= button_tag @post.third_post_status ? "公開" : "非公開", class: @post.third_post_status ? 'btn btn-success btn-sm' : 'btn btn-secondary btn-sm', style: 'margin-top: 10px;' %>
           <% end %>
         </div>
       <% end %>
 
-      <!-- 投稿者のみ表示 -->
-      <div class="mt-3">
+      <div class="mt-4">
         <% if @post.user == current_user %>
           <%= link_to '編集する', edit_public_post_path(@post), class: "btn btn-primary mr-2" %>
           <%= link_to '削除', public_post_path(@post), method: :delete, class: "btn btn-danger" %>
@@ -72,8 +68,8 @@
     </div>
   </div>
 
-  <div>
-    <div class="d-flex justify-content-start align-items-center mt-1">
+  <div class="mt-5">
+    <div class="d-flex justify-content-start align-items-center mb-4">
       <p class="mr-3">コメント件数: <%= @post.comments.count %></p>
 
       <% if @post.favorited_by?(current_user) %>
@@ -89,11 +85,11 @@
 
     <!-- コメント部分 -->
     <% if @post.comments.any? %>
-      <div class="mt-2">
+      <div class="mt-4">
         <% @post.comments.each do |post_comment| %>
-          <div class="card mb-2">
-            <div class="card-body p-2">
-              <div class="d-flex align-items-center">
+          <div class="card mb-3">
+            <div class="card-body p-3">
+              <div class="d-flex align-items-center mb-2">
                 <div class="mr-3">
                   <%= image_tag post_comment.user.get_profile_image, class: "rounded-circle", width: 40, height: 40 %>
                 </div>
@@ -103,7 +99,7 @@
                 </div>
               </div>
 
-              <p class="card-text mt-1"><%= post_comment.comment %></p>
+              <p class="card-text"><%= post_comment.comment %></p>
               <% if post_comment.user == current_user %>
                 <%= link_to "削除", public_post_comment_path(@post, post_comment), method: :delete, class: "btn btn-danger btn-sm" %>
               <% end %>
@@ -112,14 +108,15 @@
         <% end %>
       </div>
     <% else %>
-      <p>まだコメントがありません。</p>
+      <h4>まだコメントがありません。</h4>
     <% end %>
   </div>
 
-  <div class="mt-3">
+  <!-- コメント入力フォーム -->
+  <div class="mt-5">
     <%= form_with(model: [@post, Comment.new], url: public_post_comments_path(@post), local: true) do |f| %>
       <% if f.object.errors.any? %>
-        <div id="error_explanation">
+        <div id="error_explanation" class="mt-4">
           <h2><%= pluralize(f.object.errors.count, "error") %> prevented this comment from being saved:</h2>
           <ul>
             <% f.object.errors.full_messages.each do |message| %>
@@ -130,9 +127,9 @@
       <% end %>
 
       <div class="form-group">
-        <%= f.text_area :comment, rows: '2', class: "form-control", placeholder: "コメント欄" %>
+        <%= f.text_area :comment, rows: '3', class: "form-control", placeholder: "コメント欄" %>
       </div>
-      <%= f.submit "送信する", class: "btn btn-primary mb-3" %>
+      <%= f.submit "送信する", class: "btn btn-primary mb-4" %>
     <% end %>
   </div>
 </div>

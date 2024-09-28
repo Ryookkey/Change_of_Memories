@@ -1,6 +1,4 @@
 Rails.application.routes.draw do
-
-
   devise_for :admin, skip: [:registrations, :passwords], controllers: {
     sessions: "admin/sessions"
   }
@@ -23,7 +21,7 @@ Rails.application.routes.draw do
       get "followings" => "relationships#followings", as: "followings"
       get "followers" => "relationships#followers", as: "followers"
       get 'unsubscribe', to: 'users#unsubscribe'
-      get 'favorites' => 'users#favorites', as: 'favorites'
+      resources :favorites, only: [:index]
     end
 
     resources :posts, only: [:create, :new, :show, :index, :edit, :update, :destroy] do
@@ -45,6 +43,6 @@ Rails.application.routes.draw do
     resources :posts, only: [:index, :show, :destroy]
     resources :comments, only: [:index, :destroy]
   end
-  get "" => 'homes#top', as: 'admin_homes'
 
+  get "" => 'homes#top', as: 'admin_homes'
 end

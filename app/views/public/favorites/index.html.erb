@@ -1,10 +1,15 @@
-<h1>いいねした投稿一覧</h1><br>
-
 <div class="container">
+  <h1 class="mb-5">いいね一覧</h1>
+
+  <div class="d-flex justify-content-start mb-5">
+    <%= link_to "いいねが多い順", public_user_favorites_path(sort: 'likes_desc'), class: "btn btn-primary mr-2" %>
+    <%= link_to "いいねが少ない順", public_user_favorites_path(sort: 'likes_asc'), class: "btn btn-secondary" %>
+  </div>
+
   <% if @favorite_posts.any? %>
     <div class="row">
       <% @favorite_posts.each do |post| %>
-        <div class="col-md-4 mb-4">
+        <div class="col-md-4 mb-5">
           <div class="card">
             <div class="card-body">
               <div class="d-flex align-items-center mb-3">
@@ -18,7 +23,7 @@
               </div>
 
               <h5>タイトル</h5>
-              <p><%= post.title.present? ? post.title : '未記入です' %></p>
+              <p><%= link_to (post.title.present? ? post.title : '未記入です'), public_post_path(post) %></p>
 
               <h5>・First Memo</h5>
               <h5 class="card-title"><%= link_to post.first_memo, public_post_path(post) %></h5>
@@ -41,10 +46,13 @@
         </div>
       <% end %>
     </div>
-  <% else %><br>
-    <h5>まだいいねした投稿はありません。</h5>
+  <% else %>
+    <h3>まだいいねした投稿はありません。</h3>
   <% end %>
+
   <div class="row justify-content-center mt-4">
-    <%= paginate @favorite_posts, class: 'pagination justify-content-center' %>
+    <div class="col-auto">
+      <h5><%= paginate @favorite_posts, class: 'pagination justify-content-center' %></h5>
+    </div>
   </div>
 </div>

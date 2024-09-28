@@ -13,6 +13,17 @@ class Public::FavoritesController < ApplicationController
     redirect_to request.referer
   end
 
+  def index
+    sort_order = params[:sort] == 'likes_desc' ? 'desc' : 'asc'
+    @favorite_posts = Post.joins(:favorites)
+                          .where(favorites: { user_id: current_user.id })
+                          .group('posts.id')
+                          .order("COUNT(favorites.id) #{sort_order}")
+                          .page(params[:page])
+                          .per(3)
+  end
+
+
   def destroy
     post = Post.find(params[:post_id])
     favorite = current_user.favorites.find_by(post_id: post.id)

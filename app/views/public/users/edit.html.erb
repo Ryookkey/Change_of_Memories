@@ -3,7 +3,7 @@
     <h3>会員情報編集</h3>
   </div>
 
-  <%= form_with model: @user, url: public_user_path(@user), method: :patch, local: true, class: "bg-light p-4 rounded" do |f| %>
+  <%= form_with model: @user, url: user_path(@user), method: :patch, local: true, class: "bg-light p-4 rounded" do |f| %>
 
     <div class="form-group row mb-4">
       <label for="name" class="col-md-3 col-form-label">氏名</label>
@@ -36,7 +36,7 @@
     <div class="form-group row">
       <div class="col-md-9 offset-md-3">
         <%= f.submit "更新", class: "btn btn-primary" %>
-        <%= link_to '退会する', public_user_unsubscribe_path(@user), class: "btn btn-danger ml-3" %>
+        <%= link_to '退会する', user_unsubscribe_path(@user), class: "btn btn-danger ml-3" %>
       </div>
     </div>
   <% end %>

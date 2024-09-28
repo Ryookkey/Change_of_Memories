@@ -3,11 +3,11 @@
     <h1>First Memo</h1>
   </div>
 
-  <h5 class="mb-5">第一のメモです。<br>感銘を受けたこと、忘れたくないことなどを記載しましょう。</h5>
+  <h3 class="mb-5">第一のメモです。<br>感銘を受けたこと、忘れたくないことなどを記載しましょう。</h3>
 
   <div class="row mt-5 justify-content-center">
     <div class="col-md-8">
-      <%= form_with model: @post, url: public_posts_path, local: true, id: "postForm", class: "bg-light p-4 rounded" do |form| %>
+      <%= form_with model: @post, url: posts_path, local: true, id: "postForm", class: "bg-light p-4 rounded" do |form| %>
 
         <!-- First Memo -->
         <h4>First Memo</h4>
@@ -26,7 +26,6 @@
           </div>
         </div>
 
-        <!-- ボタン部分 -->
         <div class="d-flex justify-content-between mt-3 w-100">
           <%= form.submit "新規投稿", class: 'btn btn-secondary w-50 mr-2 text-wrap' %>
           <%= hidden_field_tag :next_step, false, id: "nextStepField" %>

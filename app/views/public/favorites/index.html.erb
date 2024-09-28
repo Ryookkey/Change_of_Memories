@@ -2,8 +2,8 @@
   <h1 class="mb-5">いいね一覧</h1>
 
   <div class="d-flex justify-content-start mb-5">
-    <%= link_to "いいねが多い順", public_user_favorites_path(sort: 'likes_desc'), class: "btn btn-primary mr-2" %>
-    <%= link_to "いいねが少ない順", public_user_favorites_path(sort: 'likes_asc'), class: "btn btn-secondary" %>
+    <%= link_to "いいねが多い順", user_favorites_path(sort: 'likes_desc'), class: "btn btn-primary mr-2" %>
+    <%= link_to "いいねが少ない順", user_favorites_path(sort: 'likes_asc'), class: "btn btn-secondary" %>
   </div>
 
   <% if @favorite_posts.any? %>
@@ -17,25 +17,25 @@
                   <%= image_tag post.user.get_profile_image, class: "rounded-circle", width: 50, height: 50 %>
                 </div>
                 <div>
-                  <h5 class="mb-1"><%= link_to post.user.name, public_user_path(post.user) %></h5>
+                  <h4 class="mb-1"><%= link_to post.user.name, user_path(post.user) %></h4>
                   <p class="text-muted mb-1"><%= post.created_at.strftime('%Y/%m/%d %H:%M') %></p>
                 </div>
               </div>
 
-              <h5>タイトル</h5>
-              <p><%= link_to (post.title.present? ? post.title : '未記入です'), public_post_path(post) %></p>
+              <h4>タイトル</h4>
+              <h4><%= link_to (post.title.present? ? post.title : '未記入です'), post_path(post) %></h4>
 
-              <h5>・First Memo</h5>
-              <h5 class="card-title"><%= link_to post.first_memo, public_post_path(post) %></h5>
+              <h4>First Memo</h4>
+              <h4 class="card-title"><%= link_to post.first_memo, post_path(post) %></h4>
 
-              <h5>・Second Memo</h5>
+              <h4>Second Memo</h4>
               <% if post.second_memo.present? %>
-                <h5 class="card-title"><%= link_to post.second_memo, public_post_path(post) %></h5>
+                <h4 class="card-title"><%= link_to post.second_memo, post_path(post) %></h4>
               <% end %>
 
-              <h5>・Third Memo</h5>
+              <h4>Third Memo</h4>
               <% if post.third_memo.present? %>
-                <h5 class="card-title"><%= link_to post.third_memo, public_post_path(post) %></h5>
+                <h4 class="card-title"><%= link_to post.third_memo, post_path(post) %></h4>
               <% end %>
 
               <div class="mt-3">
@@ -47,7 +47,7 @@
       <% end %>
     </div>
   <% else %>
-    <h3>まだいいねした投稿はありません。</h3>
+    <h3>いいねした投稿はありません。</h3>
   <% end %>
 
   <div class="row justify-content-center mt-4">

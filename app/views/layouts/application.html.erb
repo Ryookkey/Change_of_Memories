@@ -57,21 +57,21 @@
             <h3><%= link_to "ログアウト", destroy_user_session_path, method: :delete %></h3>
           </li>
           <li>
-            <h3><%= link_to "マイページ", public_user_path(current_user) %></h3>
+            <h3><%= link_to "マイページ", user_path(current_user) %></h3>
           </li>
           <li>
-            <h3><%= link_to "新規投稿", new_public_post_path %></h3>
+            <h3><%= link_to "新規投稿", new_post_path %></h3>
           </li>
           <li>
-            <h3><%= link_to "投稿一覧", public_posts_path %></h3>
+            <h3><%= link_to "投稿一覧", posts_path %></h3>
           </li>
           <li>
-            <h3><%= link_to "いいね一覧", public_user_favorites_path(current_user) %></h3>
+            <h3><%= link_to "いいね一覧", user_favorites_path(current_user) %></h3>
           </li>
 
           <!--検索機能-->
           <div class="search_form">
-            <%= form_with url: public_search_path, local: true, method: :get do |f| %>
+            <%= form_with url: search_path, local: true, method: :get do |f| %>
               <%= f.text_field :word %>
               <%= f.select :range, options_for_select([['User'], ['メモ']]) %>
               <%= f.select :search, options_for_select([["部分一致","partial_match"], ["完全一致","perfect_match"], ["前方一致","forward_match"],  ["後方一致","backward_match"],]) %>

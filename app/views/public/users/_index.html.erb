@@ -6,7 +6,7 @@
       </div>
 
       <div>
-        <%= link_to user.name, public_user_path(user), class: "font-weight-bold" %><br>
+        <%= link_to user.name, user_path(user), class: "font-weight-bold" %><br>
         <span>投稿数: <%= user.posts.count %></span>
       </div>
     </li>

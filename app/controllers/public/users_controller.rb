@@ -17,7 +17,7 @@ class Public::UsersController < ApplicationController
   def update
     @user = User.find(params[:id])
     if @user == current_user && @user.update(user_params)
-      redirect_to public_user_path(@user), notice: "プロフィールを更新しました。"
+      redirect_to user_path(@user), notice: "プロフィールを更新しました。"
     else
       flash[:alert] = "ご利用できない画像です。 ご利用いただける画像ファイルはpng、jpg、jpeg形式で4MB以下になります。 今一度ご確認をお願いします。"
       render :edit
@@ -43,7 +43,7 @@ class Public::UsersController < ApplicationController
     @user = User.find(params[:id] || params[:user_id])
     unless @user == current_user
       flash[:alert] = "他のユーザーのプロフィールは編集できません。"
-      redirect_to public_user_path(current_user)
+      redirect_to user_path(current_user)
     end
   end
 

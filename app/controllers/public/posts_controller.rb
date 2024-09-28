@@ -30,10 +30,10 @@ class Public::PostsController < ApplicationController
     if @post.save
       if params[:next_step] && params[:next_step] == 'true'
         flash[:notice] = "First Memoの投稿に成功しました。こちらはSecond Memoです。"
-        redirect_to second_memo_public_post_path(@post)
+        redirect_to second_memo_post_path(@post)
       else
         flash[:notice] = "First Memoが投稿されました"
-        redirect_to public_user_path(current_user)
+        redirect_to user_path(current_user)
       end
     else
       flash[:alert] = "投稿に失敗しました。入力内容をご確認ください。"
@@ -47,10 +47,10 @@ class Public::PostsController < ApplicationController
       if @post.update(post_params)
         if params[:next_step] && params[:next_step] == 'true'
           flash[:notice] = "Second Memoの投稿に成功しました。こちらはThird Memoです。"
-          redirect_to third_memo_public_post_path(@post)
+          redirect_to third_memo_post_path(@post)
         else
           flash[:notice] = "Second Memoが投稿されました"
-          redirect_to public_user_path(current_user)
+          redirect_to user_path(current_user)
         end
       else
         render :second_memo
@@ -63,7 +63,7 @@ class Public::PostsController < ApplicationController
     if request.patch?
       if @post.update(post_params)
         flash[:notice] = "Third Memoが投稿されました"
-        redirect_to public_user_path(current_user)
+        redirect_to user_path(current_user)
       else
         render :third_memo
       end
@@ -78,7 +78,7 @@ class Public::PostsController < ApplicationController
     post = Post.find(params[:id])
     if post.update(post_params)
       flash[:notice] = "投稿内容の更新を行いました"
-      redirect_to public_post_path(post.id)
+      redirect_to post_path(post.id)
     else
       flash[:alert] = "投稿内容の更新に失敗しました"
       render :edit
@@ -89,7 +89,7 @@ class Public::PostsController < ApplicationController
     post = Post.find(params[:id])
     post.destroy
     flash[:alert] = "投稿が削除されました。"
-    redirect_to public_user_path(current_user)
+    redirect_to user_path(current_user)
   end
 
   private
@@ -98,7 +98,7 @@ class Public::PostsController < ApplicationController
     @post = Post.find(params[:id])
     unless @post.user == current_user
       flash[:alert] = "権限がありません。"
-      redirect_to public_user_path(current_user)
+      redirect_to user_path(current_user)
     end
   end
 

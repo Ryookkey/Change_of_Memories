@@ -2,19 +2,19 @@
   <div class="row mt-5">
     <h1 class="text-center">Third Memo</h1>
   </div><br>
-  <h5>第三のメモです。<br>前画面ではfirst memoの内容を踏まえて、抽象化を行いました。<br>抽象化を行ったことで、気付けるアイディアが出てきます！<br>忘れないようにメモしましょう！<br>また、これまでの３つのメモの内容を踏まえてタイトルを付けると後で見返しやすくなります！</h5>
+  <h3>第三のメモです。<br>前画面ではfirst memoの内容を踏まえて、抽象化を行いました。<br>抽象化を行ったことで、気付けるアイディアが出てきます！<br>忘れないようにメモしましょう！<br>また、これまでの３つのメモの内容を踏まえてタイトルを付けると後で見返しやすくなります！</h3>
 
   <div class="row mt-5 justify-content-center">
     <div class="col-12 text-center">
-      <h5>First Memo</h5>
-      <p><%= @post.first_memo %></p>
-      <h5>Second Memo</h5>
-      <p><%= @post.second_memo %></p>
+      <h3>First Memo</h3>
+      <h3><%= @post.first_memo %></h3>
+      <h3>Second Memo</h3>
+      <h3><%= @post.second_memo %></h3>
     </div>
   </div>
 
   <div class="row mt-3 justify-content-center">
-    <%= form_with model: @post, url: third_memo_public_post_path(@post), method: :patch, local: true, class: "bg-light p-4 rounded" do |form| %>
+    <%= form_with model: @post, url: third_memo_post_path(@post), method: :patch, local: true, class: "bg-light p-4 rounded" do |form| %>
       <div class="col-12">
         <h4 class="text-center">タイトル</h4>
         <%= form.text_field :title, class: 'form-control w-100 mb-4', placeholder: "タイトル（任意）" %>

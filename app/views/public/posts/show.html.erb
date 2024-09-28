@@ -8,7 +8,7 @@
           <%= image_tag @post.user.get_profile_image, class: "rounded-circle", width: 50, height: 50 %>
         </div>
         <div>
-          <span class="font-weight-bold"><%= link_to @post.user.name, public_user_path(@post.user) %></span><br>
+          <span class="font-weight-bold"><%= link_to @post.user.name, user_path(@post.user) %></span><br>
           <span class="text-muted"><%= @post.created_at.strftime('%Y/%m/%d %H:%M') %></span>
         </div>
       </div>
@@ -17,9 +17,9 @@
       <div class="mt-4">
         <h6>First Memo</h6>
         <% if @post.first_post_status || @post.user == current_user %>
-          <p><%= @post.first_memo %></p>
+          <h4><%= @post.first_memo %></h4>
         <% else %>
-          <p>このメモは非公開です。</p>
+          <h4>このメモは非公開です。</h4>
         <% end %>
 
         <% if @post.user == current_user %>
@@ -30,11 +30,11 @@
       <!-- Second Memo -->
       <% if @post.second_memo.present? %>
         <div class="mt-4">
-          <h6>Second Memo</h6>
+          <h4>Second Memo</h4>
           <% if @post.second_post_status || @post.user == current_user %>
-            <p><%= @post.second_memo %></p>
+            <h4><%= @post.second_memo %></h4>
           <% else %>
-            <p>このメモは非公開です。</p>
+            <h4>このメモは非公開です。</h4>
           <% end %>
 
           <% if @post.user == current_user %>
@@ -46,11 +46,11 @@
       <!-- Third Memo -->
       <% if @post.third_memo.present? %>
         <div class="mt-4">
-          <h6>Third Memo</h6>
+          <h4>Third Memo</h4>
           <% if @post.third_post_status || @post.user == current_user %>
-            <p><%= @post.third_memo %></p>
+            <h4><%= @post.third_memo %></h4>
           <% else %>
-            <p>このメモは非公開です。</p>
+            <h4>このメモは非公開です。</h4>
           <% end %>
 
           <% if @post.user == current_user %>
@@ -61,8 +61,8 @@
 
       <div class="mt-4">
         <% if @post.user == current_user %>
-          <%= link_to '編集する', edit_public_post_path(@post), class: "btn btn-primary mr-2" %>
-          <%= link_to '削除', public_post_path(@post), method: :delete, class: "btn btn-danger" %>
+          <%= link_to '編集する', edit_post_path(@post), class: "btn btn-primary mr-2" %>
+          <%= link_to '削除', post_path(@post), method: :delete, class: "btn btn-danger" %>
         <% end %>
       </div>
     </div>
@@ -70,16 +70,16 @@
 
   <div class="mt-5">
     <div class="d-flex justify-content-start align-items-center mb-4">
-      <p class="mr-3">コメント件数: <%= @post.comments.count %></p>
+      <h4 class="mr-3">コメント件数: <%= @post.comments.count %></h4>
 
       <% if @post.favorited_by?(current_user) %>
-        <p>
-          <%= link_to "♥#{@post.favorites.count} いいね", public_post_favorites_path(@post), method: :delete, class: "btn btn-outline-danger btn-sm" %>
-        </p>
+        <h3>
+          <%= link_to "♥#{@post.favorites.count} いいね", post_favorites_path(@post), method: :delete, class: "btn btn-outline-danger btn-sm" %>
+        </h3>
       <% else %>
-        <p>
-          <%= link_to "♡#{@post.favorites.count} いいね", public_post_favorites_path(@post), method: :post, class: "btn btn-outline-primary btn-sm" %>
-        </p>
+        <h3>
+          <%= link_to "♡#{@post.favorites.count} いいね", post_favorites_path(@post), method: :post, class: "btn btn-outline-primary btn-sm" %>
+        </h3>
       <% end %>
     </div>
 
@@ -94,27 +94,27 @@
                   <%= image_tag post_comment.user.get_profile_image, class: "rounded-circle", width: 40, height: 40 %>
                 </div>
                 <div>
-                  <h6 class="card-title mb-1"><%= link_to post_comment.user.name, public_user_path(post_comment.user) %></h6>
-                  <p class="text-muted mb-1"><%= post_comment.created_at.strftime('%Y/%m/%d %H:%M') %></p>
+                  <h5 class="card-title mb-1"><%= link_to post_comment.user.name, user_path(post_comment.user) %></h5>
+                  <h5 class="text-muted mb-1"><%= post_comment.created_at.strftime('%Y/%m/%d %H:%M') %></h5>
                 </div>
               </div>
 
-              <p class="card-text"><%= post_comment.comment %></p>
+              <h5 class="card-text"><%= post_comment.comment %></h5>
               <% if post_comment.user == current_user %>
-                <%= link_to "削除", public_post_comment_path(@post, post_comment), method: :delete, class: "btn btn-danger btn-sm" %>
+                <%= link_to "削除", post_comment_path(@post, post_comment), method: :delete, class: "btn btn-danger btn-sm" %>
               <% end %>
             </div>
           </div>
         <% end %>
       </div>
     <% else %>
-      <h4>まだコメントがありません。</h4>
+      <h4>現在コメントがありません。</h4>
     <% end %>
   </div>
 
   <!-- コメント入力フォーム -->
   <div class="mt-5">
-    <%= form_with(model: [@post, Comment.new], url: public_post_comments_path(@post), local: true) do |f| %>
+    <%= form_with(model: [@post, Comment.new], url: post_comments_path(@post), local: true) do |f| %>
       <% if f.object.errors.any? %>
         <div id="error_explanation" class="mt-4">
           <h2><%= pluralize(f.object.errors.count, "error") %> prevented this comment from being saved:</h2>

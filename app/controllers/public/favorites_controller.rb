@@ -30,7 +30,7 @@ class Public::FavoritesController < ApplicationController
 
     if favorite.present?
       favorite.destroy
-      flash[:notice] = "いいねを削除しました"
+      flash[:alert] = "いいねを削除しました"
     else
       flash[:alert] = "いいねの削除に失敗しました"
     end

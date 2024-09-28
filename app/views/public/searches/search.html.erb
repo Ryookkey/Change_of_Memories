@@ -32,10 +32,10 @@
                   <%= image_tag post.user.get_profile_image, class: "rounded-circle", width: 50, height: 50 %>
                 </div>
                 <div class="mr-4">
-                  <%= link_to post.user.name, public_user_path(post.user), class: "text-primary font-weight-bold" %>
+                  <%= link_to post.user.name, user_path(post.user), class: "text-primary font-weight-bold" %>
                 </div>
                 <div>
-                  <%= link_to post.first_memo.truncate(50), public_post_path(post), class: "text-secondary" %>
+                  <%= link_to post.first_memo.truncate(50), post_path(post), class: "text-secondary" %>
                 </div>
               </div>
             </td>

@@ -22,7 +22,10 @@
 ・新しい知識を得たいとき  
 ​
 ## 設計書
-後ほど作成です
+・UIFlows(https://drive.google.com/file/d/1pE95Qot7QpwLlzyWu6yFpPNlVvkCneD8/view?usp=sharing)
+・ER図(https://drive.google.com/file/d/1YS3vvKoMDVZCbWzjGEprebVDZCVs_kR7/view?usp=sharing)
+・テーブル定義書(https://docs.google.com/spreadsheets/d/19Tg6MU_VlBtLB5WsX_c_QtxBOl1gzOtL-uB8QxwB2bw/edit?usp=sharing)
+・アプリケーション詳細設計書(https://docs.google.com/spreadsheets/d/1IgbJkBUleLYlH6kwzeu7CfyVavBj0L6GwFgZY0wFWaM/edit?usp=sharing)
 ​
 ## 開発環境
 - OS：Linux(CentOS)

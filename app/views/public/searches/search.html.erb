@@ -13,7 +13,7 @@
                   <%= image_tag user.get_profile_image, class: "rounded-circle", width: 50, height: 50 %>
                 </div>
                 <div>
-                  <%= link_to user.name, public_user_path(user), class: "text-primary font-weight-bold" %>
+                  <%= link_to user.name, user_path(user), class: "text-primary font-weight-bold" %>
                 </div>
               </div>
             </td>

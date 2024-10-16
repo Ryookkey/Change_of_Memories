@@ -27,6 +27,7 @@ class User < ApplicationRecord
     end
   end
 
+  # 画像設定用メソッド
   def get_profile_image
     unless profile_image.attached?
       file_path = Rails.root.join('app/assets/images/no_image.jpg')

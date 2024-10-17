@@ -38,4 +38,6 @@
 - IDE：Cloud9
 -
 ## 使用素材
+画像は下記フリー素材サイトから引用しています
+
 ・photoAC（https://www.photo-ac.com/）

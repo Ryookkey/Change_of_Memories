@@ -18,3 +18,13 @@ import "../stylesheets/application.css";
 Rails.start()
 Turbolinks.start()
 ActiveStorage.start()
+
+document.addEventListener('DOMContentLoaded', function() {
+  const cards = document.querySelectorAll('.detailCard');
+
+  cards.forEach(function(card) {
+    card.addEventListener('click', function() {
+      card.classList.toggle('elevated');
+    });
+  });
+});

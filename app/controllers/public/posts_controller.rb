@@ -18,7 +18,7 @@ class Public::PostsController < ApplicationController
 
   def show
     @post = Post.find(params[:id])
-    @post_comment = Post.new
+    @post_comment = Comment.new
     @posts = current_user.posts
   end
 
@@ -103,6 +103,6 @@ class Public::PostsController < ApplicationController
   end
 
   def post_params
-    params.require(:post).permit(:title, :first_memo, :second_memo, :third_memo, :first_post_status, :second_post_status, :third_post_status)
+    params.require(:post).permit(:title, :first_memo, :second_memo, :third_memo, :first_post_status, :second_post_status, :third_post_status, :title_post_status)
   end
 end

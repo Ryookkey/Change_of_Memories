@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <title>Change of Memories</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -12,27 +12,11 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
     <style>
-      html, body {
-        height: 100%;
-        margin: 0;
-        padding: 0;
-      }
+      
 
-      body {
-        display: flex;
-        flex-direction: column;
-      }
+      
 
-      footer {
-        margin-top: auto;
-        text-align: center;
-        padding: 1rem;
-        background-color: #f8f9fa;
-      }
-
-      .container {
-        flex: 1;
-      }
+      
     </style>
   </head>
 
@@ -50,25 +34,16 @@
 
       <ul class="header-menu">
         <li>
-          <h3><%= link_to "アバウト", about_path %></h3>
+          <h4><%= link_to "アバウト", about_path %></h4>
         </li>
         <% if user_signed_in? %>
           <li>
-            <h3><%= link_to "ログアウト", destroy_user_session_path, method: :delete %></h3>
+            <h4><%= link_to "ログアウト", destroy_user_session_path, method: :delete %></h4>
+            <h4><%= link_to "マイページ", user_path(current_user) %></h4>
+            <h4><%= link_to "新規投稿", new_post_path %></h4>
+            <h4><%= link_to "投稿一覧", posts_path %></h4>
+            <h4><%= link_to "いいね一覧", user_favorites_path(current_user) %></h4>
           </li>
-          <li>
-            <h3><%= link_to "マイページ", user_path(current_user) %></h3>
-          </li>
-          <li>
-            <h3><%= link_to "新規投稿", new_post_path %></h3>
-          </li>
-          <li>
-            <h3><%= link_to "投稿一覧", posts_path %></h3>
-          </li>
-          <li>
-            <h3><%= link_to "いいね一覧", user_favorites_path(current_user) %></h3>
-          </li>
-
           <!--検索機能-->
           <div class="search_form">
             <%= form_with url: search_path, local: true, method: :get do |f| %>
@@ -80,26 +55,16 @@
           </div>
         <% elsif admin_signed_in? %>
           <li>
-            <h3><%= link_to "ユーザ一覧", admin_users_path %></h3>
-          </li>
-          <li>
-            <h3><%= link_to "コメント一覧", admin_comments_path %></h3>
-          </li>
-          <li>
-            <h3><%= link_to "投稿一覧", admin_posts_path %></h3>
-          </li>
-          <li>
-            <h3><%= link_to "ログアウト", destroy_admin_session_path, method: :delete %></h3>
+            <h4><%= link_to "ユーザ一覧", admin_users_path %></h4>
+            <h4><%= link_to "コメント一覧", admin_comments_path %></h4>
+            <h4><%= link_to "投稿一覧", admin_posts_path %></h4>
+            <h4><%= link_to "ログアウト", destroy_admin_session_path, method: :delete %></h4>
           </li>
         <% else %>
           <li>
-            <h3><%= link_to "Change of Memories", root_path %></h3>
-          </li>
-          <li>
-            <h3><%= link_to "新規登録", new_user_registration_path %></h3>
-          </li>
-          <li>
-            <h3><%= link_to "ログイン", new_user_session_path %></h3>
+            <h4><%= link_to "Change of Memories", root_path %></h4>
+            <h4><%= link_to "新規登録", new_user_registration_path %></h4>
+            <h4><%= link_to "ログイン", new_user_session_path %></h4>
           </li>
         <% end %>
       </ul>

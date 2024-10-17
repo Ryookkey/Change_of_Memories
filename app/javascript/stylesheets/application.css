@@ -20,7 +20,7 @@ html, body {
   padding: 0;
   display: flex;
   flex-direction: column;
-  background-image: url('/assets/cloud.jpg');
+  background-image: url('/assets/wood.jpg');
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;

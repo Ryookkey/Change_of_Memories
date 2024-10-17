@@ -15,7 +15,7 @@
 
       <!-- First Memo -->
       <div class="mt-4">
-        <h6>First Memo</h6>
+        <h4>First Memo</h4>
         <% if @post.first_post_status || @post.user == current_user %>
           <h4><%= @post.first_memo %></h4>
         <% else %>
@@ -81,6 +81,19 @@
           <%= link_to "♡#{@post.favorites.count} いいね", post_favorites_path(@post), method: :post, class: "btn btn-outline-primary btn-sm" %>
         </h3>
       <% end %>
+    </div>
+
+    <!-- いいねしたユーザーの一覧表示 -->
+    <div class="mt-4">
+      <h5>いいねしたユーザー</h5>
+      <ul class="list-unstyled">
+        <% @post.favorites.each do |favorite| %>
+          <li class="d-flex align-items-center mb-3">
+            <%= image_tag favorite.user.get_profile_image, class: "rounded-circle", width: 40, height: 40 %>
+            <span class="ml-3 font-weight-bold"><%= link_to favorite.user.name, user_path(favorite.user) %></span>
+          </li>
+        <% end %>
+      </ul>
     </div>
 
     <!-- コメント部分 -->

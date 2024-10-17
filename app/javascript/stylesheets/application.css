@@ -5,17 +5,34 @@
  * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
  * vendor/assets/stylesheets directory can be referenced here using a relative path.
  *
- * You're free to add application-wide styles to this file and they'll appear at the bottom of the
- * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
- * files in this directory. Styles in this file should be added after the last require_* statement.
- * It is generally better to create a new file per style scope.
- *
  *= require_tree .
  *= require_self
  */
 
 * {
   box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.container {
+  flex: 1;
+}
+
+header {
+  padding: 20px 0;
 }
 
 .header-menu {
@@ -48,33 +65,13 @@
   color: #007bff;
 }
 
-header {
-  padding: 20px 0;
-}
-
-html {
-  height: 100%;
-  margin: 0;
-  padding: 0;
-}
-
-body {
-  display: flex;
-  flex-direction: column;
-}
-
-.container {
-  flex: 1;
-}
-
 footer {
   text-align: center;
   background-color: #f8f9fa;
   color: #333;
   margin-top: auto;
-  position: relative;
-  bottom: 0;
   width: 100%;
+  padding: 1rem;
 }
 
 footer h5 {

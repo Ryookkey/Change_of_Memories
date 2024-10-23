@@ -10,11 +10,12 @@ class ApplicationController < ActionController::Base
   def after_sign_in_path_for(resource)
     user_path(resource)
   end
-  
+
   # ゲストユーザーの判定
   def guest_user?
     current_user.email == 'guest@example.com'
   end
-  
+
   helper_method :guest_user?
+
 end

@@ -33,7 +33,7 @@
         </li>
 
         <% if user_signed_in? %>
-          <!-- ユーザログイン中 -->
+          <!-- ユーザーでログイン中 -->
           <li>
             <h4><%= link_to "ログアウト", destroy_user_session_path, method: :delete %></h4>
             <h4><%= link_to "マイページ", user_path(current_user) %></h4>
@@ -41,18 +41,18 @@
             <h4><%= link_to "投稿一覧", posts_path %></h4>
             <h4><%= link_to "いいね一覧", user_favorites_path(current_user) %></h4>
           </li>
-          <!--検索機能-->
+          <!-- 検索機能 -->
           <div class="search_form">
             <%= form_with url: search_path, local: true, method: :get do |f| %>
               <%= f.text_field :word %>
               <%= f.select :range, options_for_select([['User'], ['メモ']]) %>
-              <%= f.select :search, options_for_select([["部分一致","partial_match"], ["完全一致","perfect_match"], ["前方一致","forward_match"],  ["後方一致","backward_match"],]) %>
+              <%= f.select :search, options_for_select([["部分一致","partial_match"], ["完全一致","perfect_match"], ["前方一致","forward_match"],  ["後方一致","backward_match"]]) %>
               <%= f.submit "検索", class: "btn btn-primary" %>
             <% end %>
           </div>
 
         <% elsif admin_signed_in? %>
-          <!-- Adminログイン中 -->
+          <!-- Adminでログイン中 -->
           <li>
             <h4><%= link_to "ユーザ一覧", admin_users_path %></h4>
             <h4><%= link_to "コメント一覧", admin_comments_path %></h4>

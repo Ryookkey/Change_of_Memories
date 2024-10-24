@@ -1,5 +1,5 @@
 <div class="container">
-  <h2>フォロワーリスト</h2><br>
+  <h2><%= "#{@user.name}さんのフォロワーリスト" %></h2><br>
     <% if @users.exists? %>
       <%= render "public/users/index", users: @users %>
     <% else %>

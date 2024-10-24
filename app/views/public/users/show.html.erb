@@ -73,7 +73,7 @@
               <div class="mt-1">
                 <h4 class="card-title mb-3 text-left">First Memo</h4>
                 <% if post.first_post_status || post.user == current_user %>
-                  <h4 class="mb-4"><%= post.first_memo %></h4>
+                  <h4 class="mb-4"><%= simple_format(post.first_memo, sanitize: true) %></h4>
                 <% else %>
                   <p>このメモは非公開です。</p>
                 <% end %>
@@ -85,7 +85,7 @@
                 <div class="mt-2">
                   <h4 class="card-title mb-3 text-left">Second Memo</h4>
                   <% if post.second_post_status || post.user == current_user %>
-                    <h4 class="mb-4"><%= post.second_memo %></h4>
+                    <h4 class="mb-4"><%= simple_format(post.second_memo, sanitize: true) %></h4>
                   <% else %>
                     <p>このメモは非公開です。</p>
                   <% end %>
@@ -98,7 +98,7 @@
                <div class="mt-2">
                   <h4 class="card-title mb-3 text-left">Third Memo</h4>
                   <% if post.third_post_status || post.user == current_user %>
-                    <h4 class="mb-4"><%= post.third_memo %></h4>
+                    <h4 class="mb-4"><%= simple_format(post.third_memo, sanitize: true) %></h4>
                   <% else %>
                     <p>このメモは非公開です。</p>
                   <% end %>

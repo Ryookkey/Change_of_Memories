@@ -26,16 +26,20 @@
               <h4><%= link_to (post.title.present? ? post.title : '未記入です'), post_path(post) %></h4>
 
               <h4>First Memo</h4>
-              <h4 class="card-title"><%= link_to post.first_memo, post_path(post) %></h4>
+              <h4><%= simple_format(post.first_memo, sanitize: true) %></h4>
 
               <h4>Second Memo</h4>
               <% if post.second_memo.present? %>
-                <h4 class="card-title"><%= link_to post.second_memo, post_path(post) %></h4>
+                <h4><%= simple_format(post.second_memo, sanitize: true) %></h4>
+              <% else %>
+                <h4>未記入です</h4>
               <% end %>
 
               <h4>Third Memo</h4>
               <% if post.third_memo.present? %>
-                <h4 class="card-title"><%= link_to post.third_memo, post_path(post) %></h4>
+                <h4><%= simple_format(post.third_memo, sanitize: true) %></h4>
+              <% else %>
+                <h4>未記入です</h4>
               <% end %>
 
               <div class="mt-3">

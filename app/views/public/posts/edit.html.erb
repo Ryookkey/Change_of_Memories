@@ -6,21 +6,25 @@
   <div class="row justify-content-center">
     <div class="col-md-8">
       <%= form_with model: @post, url: post_path(@post), method: :patch, local: true, class: "bg-light p-4 rounded" do |form| %>
+        <!-- タイトル -->
         <h4>タイトル</h4>
         <%= form.text_field :title, class: 'form-control w-100 mb-4', placeholder: "タイトル（任意）" %>
+
+        <!-- タイトル 公開設定 -->
         <div class="form-group mt-3">
-            <label class="font-weight-bold">タイトル公開設定</label>
-            <div class="d-flex justify-content-start mt-2">
-              <div class="form-check form-check-inline">
-                <%= form.radio_button :first_post_status, true, class: "form-check-input", id: "first_public" %>
-                <label for="first_public" class="form-check-label">公開</label>
-              </div>
-              <div class="form-check form-check-inline ml-3">
-                <%= form.radio_button :first_post_status, false, class: "form-check-input", id: "first_private" %>
-                <label for="first_private" class="form-check-label">非公開</label>
-              </div>
+          <label class="font-weight-bold">タイトル公開設定</label>
+          <div class="d-flex justify-content-start mt-2">
+            <div class="form-check form-check-inline">
+              <%= form.radio_button :title_post_status, true, class: "form-check-input", id: "title_public" %>
+              <label for="title_public" class="form-check-label">公開</label>
+            </div>
+            <div class="form-check form-check-inline ml-3">
+              <%= form.radio_button :title_post_status, false, class: "form-check-input", id: "title_private" %>
+              <label for="title_private" class="form-check-label">非公開</label>
             </div>
           </div>
+        </div>
+
         <!-- First Memo -->
         <div class="form-group mb-4">
           <label for="first_memo" class="form-label font-weight-bold">First Memo</label>
@@ -31,12 +35,12 @@
             <label class="font-weight-bold">First Memo 公開設定</label>
             <div class="d-flex justify-content-start mt-2">
               <div class="form-check form-check-inline">
-                <%= form.radio_button :first_post_status, true, class: "form-check-input", id: "first_public" %>
-                <label for="first_public" class="form-check-label">公開</label>
+                <%= form.radio_button :first_post_status, true, class: "form-check-input", id: "first_memo_public" %>
+                <label for="first_memo_public" class="form-check-label">公開</label>
               </div>
               <div class="form-check form-check-inline ml-3">
-                <%= form.radio_button :first_post_status, false, class: "form-check-input", id: "first_private" %>
-                <label for="first_private" class="form-check-label">非公開</label>
+                <%= form.radio_button :first_post_status, false, class: "form-check-input", id: "first_memo_private" %>
+                <label for="first_memo_private" class="form-check-label">非公開</label>
               </div>
             </div>
           </div>
@@ -52,12 +56,12 @@
             <label class="font-weight-bold">Second Memo 公開設定</label>
             <div class="d-flex justify-content-start mt-2">
               <div class="form-check form-check-inline">
-                <%= form.radio_button :second_post_status, true, class: "form-check-input", id: "second_public" %>
-                <label for="second_public" class="form-check-label">公開</label>
+                <%= form.radio_button :second_post_status, true, class: "form-check-input", id: "second_memo_public" %>
+                <label for="second_memo_public" class="form-check-label">公開</label>
               </div>
               <div class="form-check form-check-inline ml-3">
-                <%= form.radio_button :second_post_status, false, class: "form-check-input", id: "second_private" %>
-                <label for="second_private" class="form-check-label">非公開</label>
+                <%= form.radio_button :second_post_status, false, class: "form-check-input", id: "second_memo_private" %>
+                <label for="second_memo_private" class="form-check-label">非公開</label>
               </div>
             </div>
           </div>
@@ -73,12 +77,12 @@
             <label class="font-weight-bold">Third Memo 公開設定</label>
             <div class="d-flex justify-content-start mt-2">
               <div class="form-check form-check-inline">
-                <%= form.radio_button :third_post_status, true, class: "form-check-input", id: "third_public" %>
-                <label for="third_public" class="form-check-label">公開</label>
+                <%= form.radio_button :third_post_status, true, class: "form-check-input", id: "third_memo_public" %>
+                <label for="third_memo_public" class="form-check-label">公開</label>
               </div>
               <div class="form-check form-check-inline ml-3">
-                <%= form.radio_button :third_post_status, false, class: "form-check-input", id: "third_private" %>
-                <label for="third_private" class="form-check-label">非公開</label>
+                <%= form.radio_button :third_post_status, false, class: "form-check-input", id: "third_memo_private" %>
+                <label for="third_memo_private" class="form-check-label">非公開</label>
               </div>
             </div>
           </div>

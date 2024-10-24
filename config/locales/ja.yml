@@ -1,4 +1,19 @@
 ja:
+  errors:
+    messages:
+      not_saved: "保存できませんでした。"
+      blank: "を入力してください。"
+      too_short: "は%{count}文字以上で入力してください。"
+      too_long: "は%{count}文字以内で入力してください。"
+      taken: "はすでに使用されています。"
+  activerecord:
+    models:
+      user: "ユーザー"
+    attributes:
+      user:
+        email: "メールアドレス"
+        password: "パスワード"
+        name: "氏名"
   devise:
     sessions:
       signed_in: 'ログインしました。'
@@ -22,11 +37,13 @@ ja:
     unlocks:
       send_instructions: 'アカウントのロック解除方法を送信しました。'
       unlocked: 'アカウントのロックが解除されました。'
-
-  views:
-    pagination:
-      first: "&laquo; 最初"
-      last: "最後 &raquo;"
-      previous: "&lsaquo; 前"
-      next: "次 &rsaquo;"
-      truncate: "..."
+    failure:
+      unauthenticated: "ログインが必要です。"
+      unconfirmed: "メールアドレスの確認が必要です。"
+      invalid: "メールアドレスまたはパスワードが正しくありません。"
+      locked: "アカウントがロックされています。"
+      last_attempt: "アカウントがロックされる直前の試行です。"
+      not_found_in_database: "メールアドレスまたはパスワードが正しくありません。"
+      timeout: "セッションがタイムアウトしました。再度ログインしてください。"
+      inactive: "アカウントが無効です。"
+      already_authenticated: "すでにログインしています。"
